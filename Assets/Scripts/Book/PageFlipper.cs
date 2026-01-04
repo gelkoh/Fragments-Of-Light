@@ -1,10 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class PageFlipper : MonoBehaviour
 {
-    //public Transform hinge; // das ist der Punkt, an dem die Seite „gebunden“ ist
     private float flipDuration = 1f;
-
     private bool isFlipping = false;
 
     public void FlipForward()
@@ -19,25 +18,34 @@ public class PageFlipper : MonoBehaviour
             StartCoroutine(FlipPage(180, 0));
     }
 
-    private System.Collections.IEnumerator FlipPage(float startAngle, float endAngle)
+    private IEnumerator FlipPage(float startAngle, float endAngle)
     {
         isFlipping = true;
         float t = 0;
+    
+        Quaternion initialRotation = transform.localRotation;
+        Vector3 initialEuler = initialRotation.eulerAngles;
 
         while (t < flipDuration)
         {
-           
             t += Time.deltaTime;
             float normalized = t / flipDuration;
-
             float angle = Mathf.Lerp(startAngle, endAngle, normalized);
-            
-            this.transform.localRotation = Quaternion.Euler(0, 0, angle);
-            
+        
+            transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, angle);
+        
             yield return null;
         }
 
-        this.transform.localRotation = Quaternion.Euler(0, 0, endAngle);
+        transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, endAngle);
         isFlipping = false;
     }
+
+	public void FlipForwardInstant()
+	{
+        Quaternion initialRotation = transform.localRotation;
+        Vector3 initialEuler = initialRotation.eulerAngles;
+        transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, 180);
+    	enabled = false;
+	}
 }

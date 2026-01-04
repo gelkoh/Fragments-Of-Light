@@ -11,14 +11,12 @@ public class LoadGameButtonAdapter : MonoBehaviour
         
         if (m_button != null)
         {
-            m_button.onClick.AddListener(HandleLoadGame);
+            m_button.onClick.AddListener(HandleLoadButtonClicked);
         }
     }
 
-    private void HandleLoadGame()
+    private void HandleLoadButtonClicked()
     {
-        SaveLoadManager saveLoadManager = ManagersManager.Get<SaveLoadManager>();
-
-        //saveLoadManager.Load();
+        ManagersManager.Get<GameStateManager>().SetState(GameState.MainMenuLoadGame);
     }
 }

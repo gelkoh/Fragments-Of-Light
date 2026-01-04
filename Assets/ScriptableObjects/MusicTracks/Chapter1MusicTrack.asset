@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d9a9e5962cc4885a599dcb0f960cc05, type: 3}
   m_Name: Chapter1MusicTrack
   m_EditorClassIdentifier: Assembly-CSharp::MusicTrack
-  audioClip: {fileID: 8300000, guid: 3be8a1acd4d36a8fca61f25f424244d3, type: 3}
+  audioClip: {fileID: 8300000, guid: 77e0b77c4828ed4929f2acd116877504, type: 3}
   context: 1
   defaultVolume: 1

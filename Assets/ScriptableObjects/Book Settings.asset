@@ -13,6 +13,30 @@ MonoBehaviour:
   m_Name: Book Settings
   m_EditorClassIdentifier: Assembly-CSharp::BookSettings
   MoveAnimationSpeed: 20
-  FirstGameplayPageIndex: 0
-  LastGameplayPageIndex: 0
   PageFlipAudioClip: {fileID: 8300000, guid: 960e5b8e3fb900c5ba17c5c6a74557f5, type: 3}
+  CoverFrontMaterial: {fileID: 2100000, guid: 8bcf2a32f8aebaeaeaf6b4f527911219, type: 2}
+  Endpaper1LeftMaterial: {fileID: 2100000, guid: d732c25ba4aaab04d9a1f711ce2b509b, type: 2}
+  Endpaper1RightMaterial: {fileID: 2100000, guid: 8931761f9e326340e9af934ac62b737c, type: 2}
+  FrontispieceMaterial: {fileID: 2100000, guid: 2f1f1b9f99f76230bbaaf760ca9b65a6, type: 2}
+  TitlepageMaterial: {fileID: 2100000, guid: bb1300aaa9a91d918b4c5d3dfb728f81, type: 2}
+  Chapter1IntroductionLeftMaterial: {fileID: 2100000, guid: eb848d171c8d4c0f5b2fe4f7c6a579f2, type: 2}
+  Chapter1IntroductionRightMaterial: {fileID: 2100000, guid: c8bbca91c489c3132994bbc09fc31721, type: 2}
+  Chapter1Level1LeftMaterial: {fileID: 2100000, guid: 00d44eed4e95637c282ab001d102708f, type: 2}
+  Chapter1Level1RightMaterial: {fileID: 2100000, guid: 3fd0b734c9c1c976da979cbb8fc31433, type: 2}
+  Chapter1Level2LeftMaterial: {fileID: 2100000, guid: 1754762d03f40afcb872e37d138f6891, type: 2}
+  Chapter1Level2RightMaterial: {fileID: 2100000, guid: f884f1c269a4071ecaeb07fdfe7d6423, type: 2}
+  Chapter2IntroductionLeftMaterial: {fileID: 2100000, guid: ffbbf9409aa9537dd99fb19eb2b86e4a, type: 2}
+  Chapter2IntroductionRightMaterial: {fileID: 2100000, guid: 21ed5ec66d2c6244799daf3a909c4c46, type: 2}
+  Chapter2Level1LeftMaterial: {fileID: 2100000, guid: 2347424a9f42e6503a29e344d20cdb14, type: 2}
+  Chapter2Level1RightMaterial: {fileID: 2100000, guid: 54154998e400deb16bddb61ce930ef58, type: 2}
+  Chapter2Level2LeftMaterial: {fileID: 2100000, guid: ea5465532ba521dce9049443e1110691, type: 2}
+  Chapter2Level2RightMaterial: {fileID: 2100000, guid: e81e8388f545de234b76b6b1404ea51f, type: 2}
+  Chapter2Level3LeftMaterial: {fileID: 2100000, guid: 9a997a0e41c76fbdcb702b76411ff42a, type: 2}
+  Chapter2Level3RightMaterial: {fileID: 2100000, guid: 4af4b274db4c28fe48ccacfb07c5b1da, type: 2}
+  Chapter2Level4LeftMaterial: {fileID: 2100000, guid: 9f475d5689bfa2aa79b9130e7afe01d3, type: 2}
+  Chapter2Level4RightMaterial: {fileID: 2100000, guid: a2ee40043c14ff3e4a76734ea7239238, type: 2}
+  ThanksForPlayingThePrototypeLeftMaterial: {fileID: 2100000, guid: 825c53aa75e111749ab21982cc5d61bf, type: 2}
+  ThanksForPlayingThePrototypeRightMaterial: {fileID: 2100000, guid: d9f68639ffbea57b7b75a0163d01f448, type: 2}
+  Endpaper2LeftMaterial: {fileID: 2100000, guid: 8f8aaca606b2237d2a1f6732bd1f68ed, type: 2}
+  Endpaper2RightMaterial: {fileID: 2100000, guid: 1a1900e6e2d16b0899ccc96fdfbb1a94, type: 2}
+  CoverBackMaterial: {fileID: 2100000, guid: 621f2a45675d2a3409adfe16534399b7, type: 2}

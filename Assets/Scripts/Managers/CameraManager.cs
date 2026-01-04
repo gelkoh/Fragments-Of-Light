@@ -18,7 +18,7 @@ public class CameraManager : SingletonManager
   	}
 
   	public void Register(PageID pageID, Camera cam)
-	{
+    {
     	m_map[pageID] = cam;
   	}
 

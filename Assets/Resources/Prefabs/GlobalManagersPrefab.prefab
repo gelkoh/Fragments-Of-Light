@@ -84,6 +84,7 @@ Transform:
   - {fileID: 302549947224217722}
   - {fileID: 778724233950212612}
   - {fileID: 6930652777343006141}
+  - {fileID: 2474164993348423679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7137022398439150627
@@ -109,6 +110,7 @@ MonoBehaviour:
   - {fileID: 7592341549199384095}
   - {fileID: 3691888094143514722}
   - {fileID: 5762658358610337616}
+  - {fileID: 3431745158984152912}
 --- !u!1 &2402196712682120415
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +155,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a70985fdfca40a9a302315e396efc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
+--- !u!1 &4139748464288904906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2474164993348423679}
+  - component: {fileID: 3431745158984152912}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2474164993348423679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139748464288904906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 637713614824812080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3431745158984152912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139748464288904906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9814b17ada4d17abffee8ecba6c749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+  m_playerPrefab: {fileID: 2228892569309393355, guid: 1969290f9d82b445098ca57bdefc84de, type: 3}
 --- !u!1 &4831000694918339092
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,8 +513,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cb5d102c360ded5afbb39e7eac6125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  m_defaultCursorTexture: {fileID: 2800000, guid: edde7b57b4f6b14c7a48255e3a20271b, type: 3}
-  m_grabCursorTexture: {fileID: 2800000, guid: 2ebb9848a293f34149907536ca13dfef, type: 3}
+  m_defaultCursorTexture: {fileID: 2800000, guid: ab2edd5c9615c76ceb7d8b1210cd65ec, type: 3}
+  m_pointerCursorTexture: {fileID: 2800000, guid: 34f34b4e5adc760c0b3f18725959f4f5, type: 3}
+  m_rotateCursorTexture: {fileID: 2800000, guid: 817f44a101b10b4e588648ccd7fa44fe, type: 3}
 --- !u!1 &9122677432959344672
 GameObject:
   m_ObjectHideFlags: 0

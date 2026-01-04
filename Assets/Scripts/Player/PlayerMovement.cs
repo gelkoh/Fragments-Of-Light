@@ -43,14 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
         // Setup input
         var inputActions = InputSystem.actions;
+        if (inputActions == null) Debug.Log("inputActions is null");
         moveAction = inputActions.FindAction("Move");
         jumpAction = inputActions.FindAction("Jump");
 
+        if (moveAction == null) Debug.Log("moveAction is null");
+        if (jumpAction == null) Debug.Log("jumpAction is null");
+        
      	moveAction.Enable();
         jumpAction.Enable();
     }
-
-    void OnDisable()
+	
+    private void OnDisable()
     {
         moveAction.Disable();
         jumpAction.Disable();
@@ -113,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     	{
         	velocity.y = jumpVelocity;
 
-        	SFXManager.Instance.PlaySFXClip(m_jumpSound, transform, 1f);
+        	ManagersManager.Get<SFXManager>().PlaySFXClip(m_jumpSound, transform, 1f);
     	}
 	}
 

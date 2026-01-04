@@ -6,10 +6,13 @@ public class Checkpoint : MonoBehaviour
 
     void Awake()
     {
-        m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        //m_spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+
+        // Hide the checkpoint when playing
+        GetComponent<SpriteRenderer>().enabled = false;
     }
     
-    public void OnTriggerEnter2D(Collider2D other)
+    /*public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Player>() != null)
         {
@@ -19,5 +22,5 @@ public class Checkpoint : MonoBehaviour
                 GameStateManager.Instance.SetCheckpoint(this);
             }    
         }
-    }
+    }*/
 }

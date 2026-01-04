@@ -13,7 +13,6 @@ public class PageFader : MonoBehaviour
 
     private void Start()
     {
-		Debug.Log("PAGE FADER START");
         Book.OnPageFlip += HandlePageFlip;
     }
     
@@ -24,10 +23,7 @@ public class PageFader : MonoBehaviour
 
     private void HandlePageFlip(PageID pageID)
     {
-		Debug.Log("SAME OR NOT?: " + (pageID == PageID.Chapter1Level1Gameplay));
-
         if (pageID == PageID.Chapter1Level1Gameplay)
-			Debug.Log("Starting coroutine");
             StartCoroutine(FadeCoroutine());
     }
     
@@ -37,8 +33,8 @@ public class PageFader : MonoBehaviour
 
         while (m_canvasGroup.alpha > 0f)
         {
-            m_canvasGroup.alpha -= 0.01f;
-            yield return new WaitForSeconds(0.05f);
+            m_canvasGroup.alpha -= 0.005f;
+            yield return new WaitForSeconds(0.02f);
         }
     }
 }

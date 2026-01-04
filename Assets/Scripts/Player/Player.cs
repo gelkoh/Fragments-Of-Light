@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     public static Player Instance;
     
 	[SerializeField] public PlayerStats m_playerStats;
+	[SerializeField] private AudioClip m_gameOverSound;
 
     private void Awake()
     {
@@ -27,9 +28,9 @@ public class Player : MonoBehaviour
 
 	private void Die()
 	{
-		Debug.Log("Player died");
+        ManagersManager.Get<SFXManager>().PlaySFXClip(m_gameOverSound, transform, 1f);
 
-        Checkpoint lastCheckpoint = GameStateManager.Instance.GetCheckpoint();
+		Checkpoint lastCheckpoint = ManagersManager.Get<PlayerManager>().GetCheckpoint();
         this.transform.position = lastCheckpoint.transform.position;
     }
 

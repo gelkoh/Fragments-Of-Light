@@ -4,25 +4,29 @@ using Unity.Cinemachine;
 public class LevelCameraController : MonoBehaviour
 {
     [Header("Camera Setup")]
-    public Camera gameplayCamera;                // Die echte Kamera für die RenderTexture
-    public CinemachineCamera cinemachineCamera;        // Die Cinemachine Kamera
-    //public RenderTexture renderTexture;          // Seite im Buch
+    [SerializeField] private Camera m_levelCamera;
+    [SerializeField] private CinemachineCamera m_cinemachineLevelCamera;
 
-    [Header("Target Setup")]
-    public Transform playerToFollow;
+	[Header("Level Setup")]
+	[SerializeField] private LevelInitializer m_initializer;
 
     public void Activate()
     {
-        gameplayCamera.enabled = true;
-        cinemachineCamera.enabled = true;
-        cinemachineCamera.Follow = playerToFollow;
+        m_levelCamera.enabled = true;
+        m_cinemachineLevelCamera.enabled = true;
 
-        //gameplayCamera.targetTexture = renderTexture;
+		if (m_initializer != null)
+		{
+			m_initializer.SpawnPlayerHere();
+		}
+
+        m_cinemachineLevelCamera.Follow = Player.Instance.transform;
     }
 
     public void Deactivate()
     {
-        gameplayCamera.enabled = false;
-        cinemachineCamera.enabled = false;
+        m_levelCamera.enabled = false;
+		m_levelCamera.targetTexture = null;
+        m_cinemachineLevelCamera.enabled = false;
     }
 }

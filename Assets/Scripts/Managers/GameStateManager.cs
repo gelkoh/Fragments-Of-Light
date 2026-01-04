@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 public enum GameState
 {
     MainMenu,
+    MainMenuSettings,
     IngameMenu,
-    Playing
+    Playing,
+    MainMenuLoad,
+	MainMenuLoadGame
 }
 
 public class GameStateManager : SingletonManager
@@ -22,13 +25,9 @@ public class GameStateManager : SingletonManager
 	}
 
 	public static Action OnStart;
-
-	private Checkpoint m_lastCheckpoint = null;
-
-
-
+	public static Action OnEnd;
+	
 	public static Action<GameState> OnGameStateChanged;
-
 
 	public override void InitializeManager()
     {
@@ -45,6 +44,12 @@ public class GameStateManager : SingletonManager
 	{
 		OnStart?.Invoke();
 		m_currentGameState = GameState.Playing;
+	}
+
+	public void EndGame()
+	{
+		OnEnd?.Invoke();
+		m_currentGameState = GameState.MainMenu;
 	}
 
 	public void SetState(GameState newState)
@@ -66,15 +71,5 @@ public class GameStateManager : SingletonManager
 		#if UNITY_EDITOR
 					UnityEditor.EditorApplication.isPlaying = false;
 		#endif
-	}
-
-	public void SetCheckpoint(Checkpoint checkpoint)
-	{
-		m_lastCheckpoint = checkpoint;
-	}
-
-	public Checkpoint GetCheckpoint()
-	{
-		return m_lastCheckpoint;
 	}
 }

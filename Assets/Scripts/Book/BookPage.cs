@@ -10,7 +10,7 @@ public class BookPage : MonoBehaviour
 
     private BookPageConfig m_bookPageConfig;
     
-    public PageID ID;
+    [SerializeField] private PageID ID;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class BookPage : MonoBehaviour
     private void InstantiateUICanvas(Camera targetCamera)
     {
         GameObject canvasInstance = Instantiate(m_bookUIConfig.PagesUICanvasPrefab, this.gameObject.transform);
-        canvasInstance.name = $"UICanvas_{targetCamera.name}";
+        canvasInstance.name = $"{gameObject.name}UICanvas";
         
         Canvas canvas = canvasInstance.GetComponent<Canvas>();
         canvas.worldCamera = targetCamera;
@@ -73,7 +73,5 @@ public class BookPage : MonoBehaviour
             pageNumber.GetComponent<TextMeshProUGUI>().text = (pageIndex * 2 + 1).ToString();
             pageNumber.layer = pageLayer;
         }
-        
-        //SceneManager.MoveGameObjectToScene(canvasInstance, SceneManager.GetSceneByName("PagesScene"));
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class LevelCamerasManager : MonoBehaviour
 {
     public List<LevelCameraController> levels;
+	[SerializeField] private int m_forChapter;
 
     private int m_levelCameraIndex = 0;
 
@@ -19,18 +20,20 @@ public class LevelCamerasManager : MonoBehaviour
 
     public void HandlePageFlip(PageID pageID)
     {
-        Debug.Log("PAGEID: " + pageID);
-        Debug.Log("pageID == PageID.Chapter1Level1Gameplay: " + (pageID == PageID.Chapter1Level1Gameplay));
-        Debug.Log("pageID == PageID.Chapter1Level2Gameplay: " + (pageID == PageID.Chapter1Level2Gameplay));
-        Debug.Log("--------------");
+		string idString = pageID.ToString();
 
-        if (pageID == PageID.Chapter1Level1Gameplay)
-            return;
-        
-        if (pageID != PageID.Chapter1Level2Gameplay)
-            return;
-        
-        Debug.Log("Deactivating camera at m_levelCameraIndex: " + m_levelCameraIndex);
+		Debug.Log("NEW PAGE ID: " + pageID);
+		Debug.Log("idString: " + idString);
+		Debug.Log("-----------------");
+
+		if (!idString.Contains("Chapter" + m_forChapter) || !idString.Contains("Gameplay")) return; 
+
+		if (pageID == PageID.Chapter1Level1Gameplay || pageID == PageID.Chapter2Level1Gameplay)
+		{
+			levels[0].Activate();
+			return;
+		}
+
         levels[m_levelCameraIndex].Deactivate();
         m_levelCameraIndex++;
 

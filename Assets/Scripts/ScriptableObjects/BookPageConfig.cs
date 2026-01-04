@@ -2,12 +2,20 @@ using UnityEngine;
 
 public enum PageID
 {
-    Cover,
-    Endpaper,
-    FrontisPieceAndTitlepage,
+    CoverFront,
+    Endpaper1,
+    FrontispieceAndTitlepage,
     Chapter1Introduction,
     Chapter1Level1Gameplay,
-    Chapter1Level2Gameplay
+    Chapter1Level2Gameplay,
+	Chapter2Introduction,
+	Chapter2Level1Gameplay,
+	Chapter2Level2Gameplay,
+	Chapter2Level3Gameplay,
+	Chapter2Level4Gameplay,
+	ThanksForPlayingThePrototype,
+	Endpaper2,
+	CoverBack
 }
 
 [CreateAssetMenu(fileName = "BookPageConfig", menuName = "ScriptableObjects/BookPageConfig")]

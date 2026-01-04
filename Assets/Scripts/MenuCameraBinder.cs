@@ -27,7 +27,10 @@ public class MenuCameraBinder : MonoBehaviour
     {
         Camera cam = m_cameraManager.GetCamera(pageID);
 
-        m_menuCanvas.worldCamera = cam;
-		m_menuCanvas.gameObject.layer = cam.gameObject.layer;
+        if (cam != null)
+        {
+            m_menuCanvas.worldCamera = cam;
+            m_menuCanvas.gameObject.layer = cam.gameObject.layer;
+        }
     }
 }

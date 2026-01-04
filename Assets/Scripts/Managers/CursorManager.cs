@@ -3,7 +3,8 @@ using UnityEngine;
 public enum CursorState
 {
     Default,
-    Grab
+	Pointer,
+    Rotate
 }
 
 public class CursorManager : SingletonManager
@@ -11,7 +12,8 @@ public class CursorManager : SingletonManager
     public static CursorManager Instance;
 
     [SerializeField] private Texture2D m_defaultCursorTexture;
-    [SerializeField] private Texture2D m_grabCursorTexture;
+    [SerializeField] private Texture2D m_pointerCursorTexture;
+    [SerializeField] private Texture2D m_rotateCursorTexture;
     
     private CursorMode m_cursorMode = CursorMode.Auto;
     private Vector2 m_hotSpot = Vector2.zero;
@@ -35,8 +37,8 @@ public class CursorManager : SingletonManager
     {        
         switch (cursorState)
         {
-            case CursorState.Grab:
-                Cursor.SetCursor(m_grabCursorTexture, m_hotSpot, m_cursorMode);
+            case CursorState.Rotate:
+                Cursor.SetCursor(m_rotateCursorTexture, m_hotSpot, m_cursorMode);
                 break;
             default:
                 Cursor.SetCursor(m_defaultCursorTexture, m_hotSpot, m_cursorMode);
