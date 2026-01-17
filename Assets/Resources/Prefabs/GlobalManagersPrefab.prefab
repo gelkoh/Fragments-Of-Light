@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   m_menuPrefab: {fileID: 1503813064842890402, guid: da718310c4718901c8cc4ec36ff3aefc, type: 3}
+  m_bookSettings: {fileID: 11400000, guid: 0130b9d811abdf3bdb3c65f511ceea63, type: 2}
 --- !u!1 &8886785998626044475
 GameObject:
   m_ObjectHideFlags: 0

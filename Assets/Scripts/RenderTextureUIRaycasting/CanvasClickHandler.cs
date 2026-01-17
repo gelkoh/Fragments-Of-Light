@@ -44,6 +44,8 @@ public class CanvasClickHandler : MonoBehaviour
         {
             GameObject clickedObject = results[0].gameObject;
             
+            Debug.Log("Clicked object: ", clickedObject);
+            
             UnityEngine.UI.Slider slider = clickedObject.GetComponentInParent<UnityEngine.UI.Slider>();
             
             if (slider != null)

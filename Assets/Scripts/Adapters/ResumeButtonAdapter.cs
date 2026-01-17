@@ -17,6 +17,7 @@ public class ResumeButtonAdapter : MonoBehaviour
 
     private void HandleResumeButtonClicked()
     {
-        ManagersManager.Get<GameStateManager>().SetState(GameState.Playing);
+        Debug.Log("Clicked resume button");
+        ManagersManager.Get<MenuManager>().HideMenu();
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Wraith : NPC, ITalkable
+public class DialogueNPC : NPC, ITalkable
 {
     [SerializeField] private DialogueText m_dialogueText;
     [SerializeField] private DialogueController m_dialogueController;

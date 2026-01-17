@@ -5,6 +5,12 @@ public abstract class NPC : MonoBehaviour, IInteractable
 {
     [SerializeField] private SpriteRenderer m_interactSprite;
     private const float INTERACT_DISTANCE = 1f;
+	private PlayerManager m_playerManager;
+
+	private void Awake()
+	{
+		m_playerManager = ManagersManager.Get<PlayerManager>();
+	}
 
     private void Update()
     {
@@ -27,9 +33,15 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     private bool IsWithinInteractDistance()
     {
-		if (Player.Instance == null) return false;
+		if (m_playerManager.GetPlayer() == null) return false;
+		//if (Player.Instance == null) return false;
 
         Transform m_playerTransform = Player.Instance.transform;
+
+		if (Player.Instance == null) 
+		{
+			Debug.Log("Player Instance null");
+		}
 
         if (Vector2.Distance(m_playerTransform.position, transform.position) < INTERACT_DISTANCE)
         {

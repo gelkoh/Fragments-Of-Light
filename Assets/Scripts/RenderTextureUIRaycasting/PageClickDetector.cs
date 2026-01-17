@@ -27,6 +27,8 @@ public class PageClickDetector : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+			Debug.DrawLine (transform.position, hit.point, Color.red);
+
             if (hit.collider.gameObject == gameObject)
             {
                 Vector2 uvHit = hit.textureCoord;
@@ -34,9 +36,15 @@ public class PageClickDetector : MonoBehaviour
                 GameObject handlerObject = GameObject.Find(m_targetCanvasName);
                 Debug.Log(m_targetCanvasName);
 
+				if (handlerObject == null)
+				{
+					Debug.Log("handlerObject null");
+				}
+
                 if (handlerObject != null)
                 {
                     CanvasClickHandler handler = handlerObject.GetComponent<CanvasClickHandler>();
+
                     if (handler != null)
                     {
                         handler.HandlePageClick(uvHit);
@@ -50,4 +58,9 @@ public class PageClickDetector : MonoBehaviour
     {
         m_targetCanvasName = canvasName;
     }
+
+	public string GetTargetCanvas()
+	{
+		return m_targetCanvasName;
+	}
 }

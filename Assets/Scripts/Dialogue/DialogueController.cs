@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using System;
 
 public class DialogueController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class DialogueController : MonoBehaviour
     private bool m_isTyping;
     private const string HTML_ALPHA = "<color=#00000000>";
     private const float MAX_TYPE_TIME = 0.1f;
+    
+    public static Action OnDialogueStarted;
+    public static Action OnDialogueEnded;
 
     public void DisplayNextParagraph(DialogueText dialogueText)
     {
@@ -25,7 +29,7 @@ public class DialogueController : MonoBehaviour
             {
                 StartConversation(dialogueText);
             }
-            else
+            else if (m_conversationEnded && !m_isTyping)
             {
                 EndConversation();
                 return;
@@ -37,9 +41,10 @@ public class DialogueController : MonoBehaviour
             m_p = m_paragraphs.Dequeue();
             m_typeDialogueCoroutine = StartCoroutine(TypeDialogueText(m_p));
         }
-        
-        
-        //m_npcDialogueText.text = m_p;
+        else
+        {
+            FinishParagraphEarly();
+        }
 
         if (m_paragraphs.Count == 0)
         {
@@ -49,6 +54,8 @@ public class DialogueController : MonoBehaviour
 
     private void StartConversation(DialogueText dialogueText)
     {
+        OnDialogueStarted?.Invoke();
+        
         if (!gameObject.activeSelf)
         {
             gameObject.SetActive(true);
@@ -70,6 +77,8 @@ public class DialogueController : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+        
+        OnDialogueEnded?.Invoke();
     }
 
     private IEnumerator TypeDialogueText(string p)
@@ -92,6 +101,15 @@ public class DialogueController : MonoBehaviour
 
             yield return new WaitForSeconds(MAX_TYPE_TIME / m_typeSpeed);
         }
+        
+        m_isTyping = false;
+    }
+
+    private void FinishParagraphEarly()
+    {
+        StopCoroutine(m_typeDialogueCoroutine);
+
+        m_npcDialogueText.text = m_p;
         
         m_isTyping = false;
     }

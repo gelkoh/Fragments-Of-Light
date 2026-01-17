@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     // Gravity & jump
     private float jumpVelocity;
     private float gravity;
+
+	private bool m_isMovementLocked = false;
 	
 	// Sound
 	[SerializeField] private AudioClip m_jumpSound;
@@ -62,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
    	private void Update()
 	{
+		if (m_isMovementLocked) return;
+
 		input = moveAction.ReadValue<Vector2>();
 
     	grounded = CheckGrounded();      // 1. Ground before anything else
@@ -141,19 +145,26 @@ public class PlayerMovement : MonoBehaviour
     // -----------------------------
 
     private bool CheckGrounded()
-	{
-    	Bounds b = col.bounds;
-    	Vector2 origin = new Vector2(b.center.x, b.min.y - 0.05f);
+    {
+        Bounds b = col.bounds;
+        Vector2 origin = new Vector2(b.center.x, b.min.y - 0.05f);
 
-    	return Physics2D.BoxCast(
-        	origin,
-        	new Vector2(b.size.x * 0.9f, 0.1f),
-        	0f,
-        	Vector2.down,
-        	0.01f,
-        	groundMask
-    	);
-	}
+        // Nutze Physics2D.queriesHitTriggers = false, um Trigger beim Boden-Check zu ignorieren
+        bool oldQueriesHitTriggers = Physics2D.queriesHitTriggers;
+        Physics2D.queriesHitTriggers = false;
+
+        RaycastHit2D hit = Physics2D.BoxCast(
+            origin,
+            new Vector2(b.size.x * 0.9f, 0.1f),
+            0f,
+            Vector2.down,
+            0.01f,
+            groundMask
+        );
+
+        Physics2D.queriesHitTriggers = oldQueriesHitTriggers;
+        return hit.collider != null;
+    }
 
     private void OnDrawGizmos()
     {
@@ -162,5 +173,15 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.color = grounded ? Color.green : Color.red;
         Bounds b = col.bounds;
         Gizmos.DrawWireCube(new Vector3(b.center.x, b.min.y - 0.05f, 0), new Vector3(b.size.x * 0.9f, 0.1f, 1));
+    }
+
+    public void SetMovementLock(bool locked)
+    {
+        m_isMovementLocked = locked;
+        if (locked)
+        {
+            velocity = Vector2.zero; // Stoppt sofort die aktuelle Trägheit
+            input = Vector2.zero;
+        }
     }
 }

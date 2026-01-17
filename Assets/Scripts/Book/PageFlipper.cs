@@ -28,8 +28,8 @@ public class PageFlipper : MonoBehaviour
 
         while (t < flipDuration)
         {
-            t += Time.deltaTime;
-            float normalized = t / flipDuration;
+			t += Time.unscaledDeltaTime;            
+			float normalized = t / flipDuration;
             float angle = Mathf.Lerp(startAngle, endAngle, normalized);
         
             transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, angle);

@@ -729,7 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Rotate3DObject
   m_speed: 3
-  m_maxVerticalAngle: 80
+  m_maxVerticalAngle: 60
   m_endPos: {x: 0, y: 0, z: -0.9}
 --- !u!1 &2098637324
 GameObject:
@@ -742,6 +742,7 @@ GameObject:
   - component: {fileID: 2098637327}
   - component: {fileID: 2098637326}
   - component: {fileID: 2098637325}
+  - component: {fileID: 2098637328}
   m_Layer: 21
   m_Name: EventSystem
   m_TagString: Untagged
@@ -810,6 +811,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2098637328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098637324}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4833542e0c5020d1ba6834771cbb2330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class Book : MonoBehaviour
 {
 	private bool m_useDebugStart = false;
-	private PageID m_debugStartPage = PageID.Chapter2Level4Gameplay;
+	private PageID m_debugStartPage = PageID.Chapter2Level2Gameplay;
 
-
+	private Material m_originalRightMaterial;
+	private Material m_originalLeftMaterial;
+	private string m_originalTargetCanvas;
 
 
 
@@ -235,10 +237,13 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 
 		if (m_currentPage == PageID.ThanksForPlayingThePrototype)
 		{
-			SceneManager.UnloadSceneAsync("Chapter2GameplayScene");
-
 			ManagersManager.Get<PlayerManager>().DestroyPlayer();
 			ManagersManager.Get<MusicManager>().Play(MusicContext.RegularPages);
+		}
+
+		if (m_currentPage == PageID.Endpaper2)
+		{
+			SceneManager.UnloadSceneAsync("Chapter2GameplayScene");
 		}
     }
     
@@ -369,4 +374,113 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
     	if (m_currentPage == PageID.Chapter2Level1Gameplay)
         	ManagersManager.Get<MusicManager>().Play(MusicContext.Chapter2);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void ShowMenuOnCurrentPage(Material menuMaterial)
+    {
+        Debug.Log("Show menu on current page");
+
+
+        // Die aktuelle Seite holen (die, die gerade offen liegt)
+        Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+
+        // Wir speichern das Original, um es später wiederherzustellen
+        m_originalRightMaterial = materials[1]; // Index 2 ist bei dir die Front/Rechts
+
+        // Menü-Material zuweisen
+        materials[1] = menuMaterial;
+        meshRenderer.materials = materials;
+
+        // Wichtig: Den Click-Detector auf das Menü-Canvas umbiegen
+        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+        if (detector != null)
+        {
+            detector.SetTargetCanvas("IngameMenuCanvas");
+        }
+    }
+
+	public void ShowMenuOnCurrentPageRight(Material menuMaterial)
+    {
+        Transform currentPage = transform.GetChild(m_currentPageIndex);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+
+        m_originalLeftMaterial = materials[2];
+
+        materials[2] = menuMaterial;
+        meshRenderer.materials = materials;
+
+        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+
+        if (detector != null)
+        {
+			m_originalTargetCanvas = detector.GetTargetCanvas();
+
+            detector.SetTargetCanvas("IngameMenuCanvas");
+        }
+    }
+
+    public void HideMenuOnCurrentPage()
+    {
+        Debug.Log("Hide menu on current page");
+        Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+
+        // Original-Material zurücksetzen
+        materials[1] = m_originalRightMaterial;
+        meshRenderer.materials = materials;
+
+
+        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+
+		if (detector != null)
+		{
+			detector.SetTargetCanvas(m_originalTargetCanvas);
+		}
+
+        // Click-Detector zurück auf das ursprüngliche Gameplay-Canvas (falls nötig)
+        // Hier müsstest du ggf. die ursprüngliche Canvas-ID zwischenspeichern
+    }
+
+
+    public void HideMenuOnCurrentPageRight()
+    {
+        Debug.Log("Hide menu on current page");
+        Transform currentPage = transform.GetChild(m_currentPageIndex);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+
+        // Original-Material zurücksetzen
+        materials[2] = m_originalLeftMaterial;
+        meshRenderer.materials = materials;
+
+ 		 PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+
+		if (detector != null)
+		{
+			detector.SetTargetCanvas(m_originalTargetCanvas);
+		}
+
+        // Click-Detector zurück auf das ursprüngliche Gameplay-Canvas (falls nötig)
+        // Hier müsstest du ggf. die ursprüngliche Canvas-ID zwischenspeichern
+    }
 }

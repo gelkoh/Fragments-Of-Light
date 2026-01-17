@@ -47,4 +47,9 @@ public class PlayerManager : SingletonManager
 	{
 		return m_lastCheckpoint;
 	}
+
+	public GameObject GetPlayer()
+	{
+		return m_activePlayer;
+	}
 }
