@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7f50be82b38a5c7aa6ed427bacd12b, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  MovementSpeed: 5
-  MaxJumpHeight: 1.5
-  MaxJumpTime: 0.75
+  MovementSpeed: 4
+  MaxJumpHeight: 2.5
+  MaxJumpTime: 1

@@ -170,7 +170,9 @@ Transform:
   - {fileID: 1715460659}
   - {fileID: 8218263824383011265}
   - {fileID: 1485328375}
+  - {fileID: 1567756320}
   - {fileID: 1536675084}
+  - {fileID: 500020825}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3756744
@@ -235,6 +237,8 @@ Transform:
   - {fileID: 1226702419}
   - {fileID: 1062060398}
   - {fileID: 724371153}
+  - {fileID: 176808130}
+  - {fileID: 1623796189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &12210096
@@ -403,6 +407,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534322e480108f02f867e87095356c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!1 &176808129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176808130}
+  - component: {fileID: 176808132}
+  - component: {fileID: 176808131}
+  m_Layer: 0
+  m_Name: InvisibleWall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &176808130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176808129}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.637, y: 6.029999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 12210095}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &176808131
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176808129}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &176808132
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176808129}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 2.6659603}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 8.701656}
+  m_EdgeRadius: 0
 --- !u!1 &180582169
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +824,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 214286195}
   m_CullTransparentMesh: 1
+--- !u!1001 &250256842
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2919767663172092740, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_Name
+      value: Flame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -52.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
 --- !u!1 &305387300
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +954,7 @@ GameObject:
   - component: {fileID: 312447140}
   - component: {fileID: 312447142}
   - component: {fileID: 312447143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Roof_Foreground_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1406,6 +1573,109 @@ MonoBehaviour:
   m_npcNameText: {fileID: 214286197}
   m_npcDialogueText: {fileID: 1881985722}
   m_typeSpeed: 10
+--- !u!1 &500020824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500020825}
+  - component: {fileID: 500020828}
+  - component: {fileID: 500020827}
+  - component: {fileID: 500020826}
+  m_Layer: 0
+  m_Name: FlameCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &500020825
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500020824}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1951243827}
+  - {fileID: 668070292}
+  m_Father: {fileID: 3756743}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &500020826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500020824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &500020827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500020824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &500020828
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500020824}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 180582171}
+  m_PlaneDistance: 10
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 15
+  m_TargetDisplay: 0
 --- !u!1 &603024499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1995,155 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 637054380}
   m_CullTransparentMesh: 1
+--- !u!1 &668070291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668070292}
+  - component: {fileID: 668070295}
+  - component: {fileID: 668070294}
+  - component: {fileID: 668070293}
+  m_Layer: 0
+  m_Name: FlamesCollectedCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &668070292
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668070291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 500020825}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 917.9998, y: 373.9997}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &668070293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668070291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae9fbbb7bba6ec7a9d1dc055518cba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &668070294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668070291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 0
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
+  m_sharedMaterial: {fileID: 2166801556489008658, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &668070295
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668070291}
+  m_CullTransparentMesh: 1
 --- !u!1 &724371152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1875,6 +2294,81 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &734800613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 734800614}
+  - component: {fileID: 734800616}
+  - component: {fileID: 734800615}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &734800614
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734800613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1623796189}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 787, y: 386}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &734800615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734800613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2e0c737849f930e158d10f70afbb674d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &734800616
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734800613}
+  m_CullTransparentMesh: 1
 --- !u!1 &776017790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,26 +2426,40 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Novi hesitated only a moment before stepping forward. Each jump demanded
-    focus. Each landing made the stones sway beneath his weight before slowly settling
-    again. Below, something shifted beneath the sea\u2019s surface \u2014 massive
-    and unseen. Novi kept his eyes forward. Mist clung low between the stones, carrying
-    whispers that brushed against the edges of hearing. Ruins rose ahead, their pillars
-    fractured and leaning, remnants of a place long abandoned. There, among stone
-    and shadow, stood a solitary figure wrapped in leaves and quiet light.\n\nThe
-    Leafshade Wanderer turned as Novi approached, veins beneath its foliage glowing
-    softly. \u201CRumors rise on poisoned air,\u201D it said, voice dry and calm.
-    \u201CThey speak of a shadow that takes what should not be taken.\u201D The fragments
-    trembled faintly. \u201CBut beware,\u201D the Wanderer continued. \u201COf the
-    demons born from drowned souls. Do not let them touch your light.\u201D\n\nAs
-    if summoned by the warning, something began to rise from the mist below \u2014
-    a shape stretched thin and wrong, its glow flickering weakly, its shadow draining
-    color from the stones it passed beneath. Novi did not wait. Guided by the fragments,
-    he ran \u2014 leaping, landing, trusting the light over fear. The demon followed,
-    never quite touching, until the stones ended and a dark forest rose suddenly
-    ahead, dense and waiting.\n\nThe fragments drifted beneath the trees, dimming
-    as they crossed the threshold. Novi followed them into the shadows. Behind, the
-    Poison Sea breathed. And above it all, the whispers lingered."
+  m_text: " barely solid, its form rising and thinning like smoke caught in moonlight.\n\nAshmurmur.
+    \u201CLittle star\u2026\u201D the spirit whispered, voice breaking apart as it
+    spoke. \u201CThis crossing remembers every fall.\u201D Novi edged closer, his
+    glow shrinking with fear. \u201CThe stones do not test your strength,\u201D Ashmurmur
+    continued softly. \u201CThey test your will to keep moving\u2026 even when the
+    ground betrays you.\u201D The demons stirred below, their whispers growing louder.
+    \u201CBeware,\u201D the spirit murmured. \u201CThe cold does not burn. It waits.
+    It steals what you linger over \u2014 memory, certainty\u2026 light.\u201D\n\nThe
+    fragments pulsed urgently. Novi did not reply. He jumped. The final stretch was
+    the longest. Stones drifted far apart now, some barely solid, others spinning
+    slowly in place. The blue glow below pulsed brighter, responding to each near-miss,
+    each slip barely corrected. At last, Novi landed hard on solid ground. The stones
+    behind him trembled \u2014 then fell away, dissolving into mist and silence as
+    if they had never existed.\n\nAhead, the land rose into a narrow ridge. Novi
+    approached it slowly, chest tight, legs shaking. From there, the world opened
+    wide. Far in the distance, beyond layers of pale mist and frozen light, stood
+    a dark kingdom etched against the horizon. Moving toward it was a tall figure
+    wrapped in shadow. The Veilkeeper. In his arms rested a faint, familiar glow.
+    Lumen. She was still. Contained. Alive. Novi\u2019s breath caught painfully in
+    his chest.\n\nAshmurmur\u2019s whisper came from behind him, softer now. \u201CA
+    truth buried,\u201D it said. \u201CThe lover sleeps\u2026 not dead, but bound
+    by illness.\u201D \u201CA soul-born lineage carries the remedy within.\u201D
+    The fragments pulsed once, sharply. Novi understood. Their family had not been
+    hunted for power. They had been hunted because they could heal. The ridge fell
+    silent. Behind him, there was no way back \u2014 only the memory of stones that
+    no longer existed, and the certainty that every step forward would demand more.\n\nAs
+    Novi ran, the fragments shifted their rhythm, sometimes drifting closer, sometimes
+    pulling ahead with quiet insistence. Each one felt like a memory trying not to
+    be forgotten. He did not know whether they were leading him forward \u2014 or
+    simply refusing to fade.\n\nHis legs moved on instinct alone now. Thought had
+    become too heavy to carry. Fear dulled into something quieter, something sharper.
+    Grief followed him like a second shadow, pressing close whenever he slowed. The
+    forest swallowed sound. Even the whispers grew distant, as if the world itself
+    was holding its breath.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
   m_sharedMaterial: {fileID: 2166801556489008658, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
@@ -2538,38 +3046,39 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Novi did not remember standing up. One moment there was stone beneath
-    his cheek, cold and sharp, and the next the world swayed unsteadily around him.
-    The air burned in his lungs as if each breath scraped something raw inside. Sound
-    came slowly \u2014 first the distant rush of wind, then the dull pounding of
-    his own heart.\n\nEverything felt too quiet. Novi\u2019s hand moved before thought
-    could catch up, reaching instinctively for warmth that had always been there.
-    His fingers closed on nothing. The absence struck like a blow. \u201CLumen?\u201D
-    The name slipped out hoarse, barely more than a breath. No answer came.\n\nPanic
-    rose fast and fierce, tightening Novi\u2019s chest until breathing became difficult.
-    He turned sharply, ignoring the protest of aching muscles, searching the ground,
-    the air, the empty space beside him. Memory flickered in broken flashes \u2014
-    light flaring too bright to look at, a towering shadow blotting out the sky,
-    hands reaching and pulling away. Gone.\n\nThe certainty settled heavily, sinking
-    into Novi\u2019s bones. Lumen was not nearby. Lumen was not hiding. Whatever
-    had happened, it had left silence behind \u2014 deep, final, and wrong. Novi
-    staggered forward, calling her name again, louder this time, until it dissolved
-    into the wind. That was when the light stirred.\n\nSmall fragments drifted into
-    view, hovering uncertainly in the air ahead. Their glow was soft, familiar, and
-    it pulled painfully at something inside Novi\u2019s chest. When he reached toward
-    them with shaking fingers, the fragments brightened, then slowly began to move
-    away \u2014 not fleeing, but guiding.\n\nNovi swallowed hard and followed. The
-    land ended without warning. He stopped short at the edge of a cliff, boots scraping
-    stone. Beyond it stretched a sea so vast and unnatural that panic gave way to
-    something colder and quieter. The sea did not move like water should. It breathed.
-    A slow, sickening rise and fall rippled across its surface, thick and clouded,
-    streaked with pale veins of light that pulsed faintly in the dark. Wherever it
-    touched stone, the rock blistered and blackened. Where droplets fell, the air
-    hissed softly, as though the world itself recoiled. No waves broke its surface.
-    No birds crossed the sky above it.\n\nAbove the Poison Sea, broken stones floated
-    in the air, suspended as if held by an unseen force. Some drifted close together,
-    others hovered farther apart, cracked and worn by time. The fragments of light
-    lingered above them, steady and patient."
+  m_text: "The ground did not welcome Novi. Beyond the forest, the land fractured
+    into nothing but space and stone \u2014 a vast expanse of suspended rock slabs
+    drifting above a pale, lightless depth. The air was cold and heavy, pressing
+    against Novi\u2019s chest with each breath. Far below, a blue glow pulsed slowly,
+    like a frozen sea without a surface. \n\nThe fragments dimmed. They did not hover
+    close this time. Instead, they spread ahead, scattered across the air as if marking
+    a path only barely held together. Novi stepped forward \u2014 and stopped. The
+    first stone floated a short distance away, its surface slick with frost, its
+    edges crumbling as though they no longer trusted themselves to exist. A faint
+    tremor ran through it, subtle but unmistakable.\n\nIf he fell, there would be
+    no ground to catch him. Only the cold below. Novi swallowed and jumped. The stone
+    dipped under his weight, then steadied. Cold bit instantly through his boots,
+    crawling upward, stiffening his legs. He did not linger. The next stone hovered
+    farther away, thinner, cracked clean through the middle. Beyond it, another drifted
+    slowly, never quite staying in the same place.\n\nThis was not a path. It was
+    a question. Each jump demanded more than strength \u2014 it demanded trust. Not
+    in the stones, which trembled and shifted, but in the fragments of light that
+    guided him forward, always just far enough away to force another leap.\n\nBelow,
+    the blue glow stirred. Mist rose from the depths, carrying whispers that brushed
+    against Novi\u2019s thoughts. Not words \u2014 memories. Faces half-remembered.
+    Voices without names. The longer he lingered, the more the cold pressed inward,
+    dulling sensation, blurring time. Something moved beneath the stones. Demons
+    surfaced slowly from the glow below, their forms thin and translucent, shaped
+    from mist and pale light. They did not climb. They waited. When Novi paused too
+    long on a stone, they drifted closer, their presence pulling at his focus, urging
+    hesitation.\n\nNovi learned quickly. Do not stop. Do not look down. Do not listen.
+    He jumped again. And again. Some stones vanished the moment he left them behind,
+    dissolving soundlessly into the blue. Others cracked beneath his landing, forcing
+    him onward before fear could settle. His muscles burned from cold and effort
+    alike, but stopping was worse. Falling was not death. Falling was erasure.\n\nThe
+    fragments flared suddenly, pulling him toward a wider platform where the mist
+    thickened. There, standing where the stones clustered more tightly, was a cloaked
+    figure \u2014"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
   m_sharedMaterial: {fileID: 2166801556489008658, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
@@ -2976,6 +3485,155 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1058314245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058314246}
+  - component: {fileID: 1058314249}
+  - component: {fileID: 1058314248}
+  - component: {fileID: 1058314247}
+  m_Layer: 0
+  m_Name: FlamesCollectedCounter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1058314246
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058314245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1623796189}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 917.9998, y: 373.9997}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1058314247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058314245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae9fbbb7bba6ec7a9d1dc055518cba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &1058314248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058314245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 0
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
+  m_sharedMaterial: {fileID: 2166801556489008658, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1058314249
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058314245}
+  m_CullTransparentMesh: 1
 --- !u!1 &1062060396
 GameObject:
   m_ObjectHideFlags: 0
@@ -3765,7 +4423,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1000
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &1485328381
 MonoBehaviour:
@@ -3885,6 +4543,171 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1001 &1567756319
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3756743}
+    m_Modifications:
+    - target: {fileID: 2919767663172092740, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_Name
+      value: Flame
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -32.127
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.3409996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+--- !u!4 &1567756320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5550269799657365616, guid: 80d4e2ac306ee9ea0bb2555c1692190d, type: 3}
+  m_PrefabInstance: {fileID: 1567756319}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1623796188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623796189}
+  - component: {fileID: 1623796192}
+  - component: {fileID: 1623796191}
+  - component: {fileID: 1623796190}
+  m_Layer: 0
+  m_Name: FlameCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1623796189
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623796188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 734800614}
+  - {fileID: 1058314246}
+  m_Father: {fileID: 12210095}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1623796190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623796188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1623796191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623796188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1623796192
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623796188}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 330594369}
+  m_PlaneDistance: 10
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 15
+  m_TargetDisplay: 0
 --- !u!1 &1647422659
 GameObject:
   m_ObjectHideFlags: 0
@@ -4356,62 +5179,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1799512843 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4308160752693531230, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
-  m_PrefabInstance: {fileID: 3486822663375904944}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1799512844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3326052187964849986, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
   m_PrefabInstance: {fileID: 3486822663375904944}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &1799512845
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799512843}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 6.12, y: 12.7}
-    newSize: {x: 6.12, y: 12.7}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 6.12, y: 12.7}
-  m_EdgeRadius: 0
 --- !u!1 &1806512246
 GameObject:
   m_ObjectHideFlags: 0
@@ -5303,6 +6075,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 12210095}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1951243826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951243827}
+  - component: {fileID: 1951243829}
+  - component: {fileID: 1951243828}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1951243827
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951243826}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 500020825}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 787, y: 386}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1951243828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951243826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2e0c737849f930e158d10f70afbb674d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1951243829
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951243826}
+  m_CullTransparentMesh: 1
 --- !u!1 &1963418813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,7 +6570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3326052187964849986, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.025
+      value: 6.107
       objectReference: {fileID: 0}
     - target: {fileID: 3326052187964849986, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5792,17 +6639,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4308160752693531230, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799512845}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
 --- !u!114 &3486822663375904945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3865278039147819349, guid: 70f1ed54a71720e4db526d1b55e52f68, type: 3}
   m_PrefabInstance: {fileID: 3486822663375904944}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799512843}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6acc578e25814243bd78cd16a547f6b1, type: 3}
@@ -6033,3 +6877,4 @@ SceneRoots:
   - {fileID: 370569871}
   - {fileID: 12210095}
   - {fileID: 1963418815}
+  - {fileID: 250256842}

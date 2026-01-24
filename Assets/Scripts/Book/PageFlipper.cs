@@ -6,38 +6,49 @@ public class PageFlipper : MonoBehaviour
     private float flipDuration = 1f;
     private bool isFlipping = false;
 
+private Quaternion initialRotation;
+void Awake()
+    {
+        // Wir merken uns die Rotation, wie sie aus Blender/dem Import kommt.
+        initialRotation = transform.localRotation;
+    }
+
     public void FlipForward()
     {
         if (!isFlipping)
-            StartCoroutine(FlipPage(0, 180));
-    }
+			StartCoroutine(FlipRoutine(0, 180f)); // Von 0 Grad Abweichung zu -180 Grad    
+	}
 
     public void FlipBackward()
     {
         if (!isFlipping)
-            StartCoroutine(FlipPage(180, 0));
+            StartCoroutine(FlipRoutine(180f, 0));
     }
 
-    private IEnumerator FlipPage(float startAngle, float endAngle)
+    private IEnumerator FlipRoutine(float startAngle, float endAngle)
     {
         isFlipping = true;
         float t = 0;
-    
-        Quaternion initialRotation = transform.localRotation;
-        Vector3 initialEuler = initialRotation.eulerAngles;
 
         while (t < flipDuration)
         {
-			t += Time.unscaledDeltaTime;            
-			float normalized = t / flipDuration;
-            float angle = Mathf.Lerp(startAngle, endAngle, normalized);
-        
-            transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, angle);
-        
+            t += Time.unscaledDeltaTime;
+            float normalized = t / flipDuration;
+            
+            // Wir nutzen eine sanfte Kurve für das Umblättern
+            float easedTime = Mathf.SmoothStep(0, 1, normalized);
+            float currentAngle = Mathf.Lerp(startAngle, endAngle, easedTime);
+
+            // DIE BERECHNUNG:
+            // Wir nehmen die Import-Rotation und fügen eine Rotation UM die lokale X-Achse hinzu.
+            // Vector3.right entspricht der lokalen roten Achse (X).
+            transform.localRotation = initialRotation * Quaternion.AngleAxis(currentAngle, Vector3.forward);
+
             yield return null;
         }
 
-        transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, endAngle);
+        // Exakten Endwert setzen
+        transform.localRotation = initialRotation * Quaternion.AngleAxis(endAngle, Vector3.forward);
         isFlipping = false;
     }
 

@@ -23,7 +23,7 @@ public class PageFader : MonoBehaviour
 
     private void HandlePageFlip(PageID pageID)
     {
-        if (pageID == PageID.Chapter1Level1Gameplay)
+        if (pageID == PageID.Chapter1Level1Gameplay || pageID == PageID.Chapter2Level1Gameplay)
             StartCoroutine(FadeCoroutine());
     }
     

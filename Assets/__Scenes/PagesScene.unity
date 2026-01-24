@@ -6570,7 +6570,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: We need text here
+  m_text: "The world beyond the forest did not feel alive.\n\nWhere earth should
+    have stretched onward, only fragments remained \u2014 stone torn from its place,
+    suspended above a silent blue depth. Cold clung to everything, seeping into breath
+    and thought alike. Even the fragments of light seemed uncertain here, their glow
+    muted, their movement hesitant.\n\nThis place remembered falling.\n\nNovi stepped
+    forward not because he was unafraid, but because stopping meant listening \u2014
+    and the silence below carried too many voices. Each leap across the broken path
+    carried him farther from what he had been, and closer to something waiting beyond
+    the mist.\n\nBelow the stones, something stirred.\nAbove them, the light endured.\n\nAnd
+    so Novi crossed \u2014 not knowing if the ground ahead would hold, but knowing
+    that turning back would not.\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}
   m_sharedMaterial: {fileID: 2166801556489008658, guid: 21b7e41dfbfa7fb9eb024b2ee5a77b48, type: 2}

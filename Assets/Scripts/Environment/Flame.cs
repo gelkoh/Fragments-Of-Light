@@ -1,13 +1,16 @@
 using UnityEngine;
+using System;
 
 public class Flame : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    public static Action OnFlameCollected;
+    
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.collider.tag == "Player")
+        if (collider.tag == "Player")
         {
-            Debug.Log("Player collision with flame");
-            Destroy(this);
+            OnFlameCollected?.Invoke();
+            Destroy(gameObject);
         }
     }
 }

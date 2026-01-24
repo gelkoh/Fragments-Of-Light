@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class Player : MonoBehaviour
     
 	[SerializeField] public PlayerStats m_playerStats;
 	[SerializeField] private AudioClip m_gameOverSound;
+
+	public int flamesCollected = 0;
+	public static Action OnFlameCountUpdated;
 	
 	private PlayerMovement m_movement;
 
@@ -27,13 +31,20 @@ public class Player : MonoBehaviour
     	Book.OnPageFlip += HandlePageFlip;
 		DialogueController.OnDialogueStarted += LockMovement;
         DialogueController.OnDialogueEnded += UnlockMovement;
+		Flame.OnFlameCollected += HandleFlameCollected;
 	}
 
 	private void OnDisable()
 	{
     	Book.OnPageFlip -= HandlePageFlip;
 		DialogueController.OnDialogueStarted -= LockMovement;
-        DialogueController.OnDialogueEnded -= UnlockMovement;
+        DialogueController.OnDialogueEnded -= UnlockMovement;		
+		Flame.OnFlameCollected -= HandleFlameCollected;
+	}
+
+	private void Start()
+	{
+		StartCoroutine(TemporaryMovementLock(12f)); 
 	}
 
 	public void Die()
@@ -47,14 +58,11 @@ public class Player : MonoBehaviour
     
     	ManagersManager.Get<SFXManager>().PlaySFXClip(m_gameOverSound, transform, 1f);
 
-    	// 2. Teleport zum Checkpoint
     	Checkpoint lastCheckpoint = ManagersManager.Get<PlayerManager>().GetCheckpoint();
     	this.transform.position = lastCheckpoint.transform.position;
 
-    	// 3. Eine Sekunde warten
     	yield return new WaitForSeconds(1f);
 
-    	// 4. Bewegung wieder freigeben
     	m_movement.SetMovementLock(false);
 	}
 
@@ -76,13 +84,20 @@ public class Player : MonoBehaviour
 		transform.position = playerSaveData.Position;
 	}
 
-	private void HandlePageFlip(PageID id)
+	private void HandlePageFlip(PageID pageID)
 	{
-    	StartCoroutine(TemporaryMovementLock(1.5f)); 
+    	StartCoroutine(TemporaryMovementLock(1.2f)); 
 	}
     
 	private void LockMovement() => m_movement.SetMovementLock(true);
     private void UnlockMovement() => m_movement.SetMovementLock(false);
+
+	private void HandleFlameCollected()
+	{
+		flamesCollected++;
+		Debug.Log("Flames collected: " + flamesCollected);
+		OnFlameCountUpdated?.Invoke();
+	}
 }
 
 [System.Serializable]

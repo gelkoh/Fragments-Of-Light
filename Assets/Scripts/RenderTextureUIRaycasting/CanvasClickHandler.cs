@@ -16,7 +16,6 @@ public class CanvasClickHandler : MonoBehaviour
 
     public void HandlePageClick(Vector2 uvHit)
     {
-        Debug.Log("UV Hit: " + uvHit);
         if (canvas == null) return;
         
         float pixelX = uvHit.x * referenceResolution.x;

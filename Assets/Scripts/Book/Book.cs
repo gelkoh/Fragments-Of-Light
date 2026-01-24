@@ -282,8 +282,13 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 	{
 		MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
 		Material[] materials = meshRenderer.materials;
-		materials[1] = back;
-		materials[2] = front;
+
+		if (materials.Length == 3)
+		{
+			materials[1] = back;
+			materials[2] = front;
+		} 
+
 		meshRenderer.materials = materials;
 	}
 
