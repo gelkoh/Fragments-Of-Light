@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ece888bd0ec44d980a8c4ba5ac17f60, type: 3}
-  m_Name: LeafshadeWandererConversation
+  m_Name: Emberin
   m_EditorClassIdentifier: Assembly-CSharp::DialogueText
   speakerName: Leafshade Wanderer
   paragraphs:
   - "Rumors rise like wind. They say the Veilkeeper destroys to take\u2026 power."
   - But power is never the whole truth.
-  - "Beware the demons born from drowned souls \u2014 do not let them touch your
-    light."
+  - Guard your light carefully. This place feeds on what flickers.
