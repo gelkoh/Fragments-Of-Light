@@ -29,7 +29,7 @@ public class PageFader : MonoBehaviour
     
     private IEnumerator FadeCoroutine()
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(6f);
 
         while (m_canvasGroup.alpha > 0f)
         {

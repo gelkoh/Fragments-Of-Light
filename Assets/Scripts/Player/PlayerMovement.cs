@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 /*[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
@@ -180,8 +181,6 @@ public class PlayerMovement : MonoBehaviour
     }
 }*/
 
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerMovement : MonoBehaviour
@@ -189,6 +188,7 @@ public class PlayerMovement : MonoBehaviour
     // Components
     private Rigidbody2D rb;
     private BoxCollider2D col;
+    private Animator m_animator;
 
     // Input
     private InputAction moveAction;
@@ -205,10 +205,11 @@ public class PlayerMovement : MonoBehaviour
     public bool grounded { get; private set; }
     public bool onWallLeft { get; private set; }
     public bool onWallRight { get; private set; }
-    public LayerMask groundMask;
+    public bool hitCeiling { get; private set; }
     
-    [Header("Wall Jump Layer")]
-    [SerializeField] private LayerMask wallJumpMask; // Separater Layer für Walls
+    [Header("Collision Layers")]
+    [Tooltip("Layer für alle soliden Objekte (Boden, Wände, Decken)")]
+    public LayerMask solidObjectMask;
 
     // Gravity & jump
     private float jumpVelocity;
@@ -245,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        m_animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -272,9 +274,11 @@ public class PlayerMovement : MonoBehaviour
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         
-        // Wenn wallJumpMask nicht gesetzt, nutze groundMask
-        if (wallJumpMask == 0)
-            wallJumpMask = groundMask;
+        // Fallback: Wenn solidObjectMask leer, versuche alte Masks
+        if (solidObjectMask == 0)
+        {
+            Debug.LogWarning("[PlayerMovement] solidObjectMask ist nicht gesetzt! Bitte im Inspector konfigurieren.");
+        }
     }
     
     private void OnEnable()
@@ -301,6 +305,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Collision Checks
         grounded = CheckGrounded();
+        hitCeiling = CheckCeiling();
         onWallLeft = CheckWall(-1);
         onWallRight = CheckWall(1);
 
@@ -323,8 +328,12 @@ public class PlayerMovement : MonoBehaviour
         HandleMovement();
         HandleJump();
         ApplyGravity();
+        UpdateAnimations(); // NEU: Animationen separat updaten
+    }
 
-        // Wende Velocity an
+    private void FixedUpdate()
+    {
+        // Wende Velocity in FixedUpdate an (besser für Physik)
         rb.linearVelocity = velocity;
     }
 
@@ -406,6 +415,12 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // FIX #1: Decken-Kollision - Stoppe aufwärts Bewegung sofort
+        if (hitCeiling && velocity.y > 0f)
+        {
+            velocity.y = 0f;
+        }
+
         // FIX #3: Wall Slide nur wenn in Richtung der Wand gedrückt wird
         bool onWall = onWallLeft || onWallRight;
         bool pushingIntoWall = (onWallLeft && input.x < -0.1f) || (onWallRight && input.x > 0.1f);
@@ -422,6 +437,26 @@ public class PlayerMovement : MonoBehaviour
         float multiplier = falling ? 2f : 1f;
 
         velocity.y += gravity * multiplier * Time.deltaTime;
+    }
+
+    // -----------------------------
+    // Animation
+    // -----------------------------
+    private void UpdateAnimations()
+    {
+        if (m_animator == null) return;
+
+        // Walking Animation: Nur wenn am Boden UND sich bewegt
+        bool isWalking = grounded && Mathf.Abs(velocity.x) > 0.005f;
+        m_animator.SetBool("isWalking", isWalking);
+
+        // Jumping Animation: Wenn NICHT am Boden
+        bool isJumping = !grounded;
+        m_animator.SetBool("isJumping", isJumping);
+
+        // Optional: Falling Animation (wenn du eine hast)
+        // bool isFalling = !grounded && velocity.y < 0;
+        // m_animator.SetBool("isFalling", isFalling);
     }
 
     // -----------------------------
@@ -446,7 +481,32 @@ public class PlayerMovement : MonoBehaviour
             0f,
             Vector2.down,
             groundCheckDistance,
-            groundMask
+            solidObjectMask
+        );
+
+        Physics2D.queriesHitTriggers = oldQueriesHitTriggers;
+        return hit.collider != null;
+    }
+
+    private bool CheckCeiling()
+    {
+        Bounds b = col.bounds;
+        
+        // Ähnlich wie GroundCheck, aber nach oben
+        float boxWidth = b.size.x - skinWidth * 2;
+        Vector2 boxSize = new Vector2(boxWidth, groundCheckDistance);
+        Vector2 origin = new Vector2(b.center.x, b.max.y);
+
+        bool oldQueriesHitTriggers = Physics2D.queriesHitTriggers;
+        Physics2D.queriesHitTriggers = false;
+
+        RaycastHit2D hit = Physics2D.BoxCast(
+            origin,
+            boxSize,
+            0f,
+            Vector2.up,
+            groundCheckDistance,
+            solidObjectMask
         );
 
         Physics2D.queriesHitTriggers = oldQueriesHitTriggers;
@@ -467,14 +527,13 @@ public class PlayerMovement : MonoBehaviour
         bool oldQueriesHitTriggers = Physics2D.queriesHitTriggers;
         Physics2D.queriesHitTriggers = false;
 
-        // FIX #2: Nutze wallJumpMask statt groundMask für Wall Checks
         RaycastHit2D hit = Physics2D.BoxCast(
             origin,
             boxSize,
             0f,
             Vector2.right * direction,
             wallCheckDistance,
-            wallJumpMask
+            solidObjectMask
         );
 
         Physics2D.queriesHitTriggers = oldQueriesHitTriggers;
@@ -492,6 +551,11 @@ public class PlayerMovement : MonoBehaviour
         float boxWidth = b.size.x - skinWidth * 2;
         Vector2 groundOrigin = new Vector2(b.center.x, b.min.y);
         Gizmos.DrawWireCube(groundOrigin, new Vector3(boxWidth, groundCheckDistance, 1));
+
+        // Ceiling Check Visualisierung
+        Gizmos.color = hitCeiling ? Color.yellow : Color.gray;
+        Vector2 ceilingOrigin = new Vector2(b.center.x, b.max.y);
+        Gizmos.DrawWireCube(ceilingOrigin, new Vector3(boxWidth, groundCheckDistance, 1));
 
         // Wall Check Visualisierung
         Gizmos.color = onWallLeft ? Color.blue : Color.gray;
@@ -537,6 +601,7 @@ public class PlayerMovement : MonoBehaviour
         
         // Force Ground Check Update
         grounded = false;
+        hitCeiling = false;
         onWallLeft = false;
         onWallRight = false;
     }

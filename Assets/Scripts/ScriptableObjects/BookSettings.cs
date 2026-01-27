@@ -49,4 +49,8 @@ public class BookSettings : ScriptableObject
 
 	public Material IngameMenuLeftMaterial;
 	public Material IngameMenuRightMaterial;
+	
+	public Material UnusedPageMaterial;
+	public Material SpineMaterial;
+	public Material CoverSideMaterial;
 }

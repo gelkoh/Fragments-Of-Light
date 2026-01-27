@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ece888bd0ec44d980a8c4ba5ac17f60, type: 3}
   m_Name: Emberin
   m_EditorClassIdentifier: Assembly-CSharp::DialogueText
-  speakerName: Leafshade Wanderer
+  speakerName: Emberin
   paragraphs:
   - "Rumors rise like wind. They say the Veilkeeper destroys to take\u2026 power."
   - But power is never the whole truth.

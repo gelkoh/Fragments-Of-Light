@@ -21,7 +21,7 @@ public class BookPage : MonoBehaviour
     
     private void InstantiateUICanvas(Camera targetCamera)
     {
-        GameObject canvasInstance = Instantiate(m_bookUIConfig.PagesUICanvasPrefab, this.gameObject.transform);
+        GameObject canvasInstance = Instantiate(m_bookUIConfig.PagesUICanvasPrefab, this.gameObject.transform.parent);
         canvasInstance.name = $"{gameObject.name}UICanvas";
         
         Canvas canvas = canvasInstance.GetComponent<Canvas>();

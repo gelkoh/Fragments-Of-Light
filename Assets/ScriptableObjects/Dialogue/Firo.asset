@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ece888bd0ec44d980a8c4ba5ac17f60, type: 3}
   m_Name: Firo
   m_EditorClassIdentifier: Assembly-CSharp::DialogueText
-  speakerName: Speaker Name
+  speakerName: Firo
   paragraphs:
   - "Little star\u2026 your path burns with danger."
   - "The kingdom lies ahead\u2026 but the ground remembers screams."

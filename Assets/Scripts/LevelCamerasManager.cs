@@ -11,11 +11,13 @@ public class LevelCamerasManager : MonoBehaviour
     private void OnEnable()
     {
         Book.OnPageFlip += HandlePageFlip;
+        GameStateManager.OnEnd += HandleEndGame;
     }
     
     private void OnDisable()
     {
         Book.OnPageFlip -= HandlePageFlip;
+        GameStateManager.OnEnd -= HandleEndGame;
     }
 
     public void HandlePageFlip(PageID pageID)
@@ -38,5 +40,10 @@ public class LevelCamerasManager : MonoBehaviour
         m_levelCameraIndex++;
 
         levels[m_levelCameraIndex].Activate();
+    }
+
+    private void HandleEndGame()
+    {
+	    m_levelCameraIndex = 0;
     }
 }

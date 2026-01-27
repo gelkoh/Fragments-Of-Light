@@ -42,3 +42,6 @@ MonoBehaviour:
   CoverBackMaterial: {fileID: 2100000, guid: 621f2a45675d2a3409adfe16534399b7, type: 2}
   IngameMenuLeftMaterial: {fileID: 2100000, guid: 19971345704a300afa8de667ba2f681f, type: 2}
   IngameMenuRightMaterial: {fileID: 2100000, guid: 44d7aec5793644d148862d425e9d1a67, type: 2}
+  UnusedPageMaterial: {fileID: 2100000, guid: c5d09714fd5f78618bcc422713c33d72, type: 2}
+  SpineMaterial: {fileID: 2100000, guid: 66e0c17512bb1e8c2aaf8eda9ae0c3a9, type: 2}
+  CoverSideMaterial: {fileID: 2100000, guid: b0cadee2989a2459cbf20742c6e0d267, type: 2}

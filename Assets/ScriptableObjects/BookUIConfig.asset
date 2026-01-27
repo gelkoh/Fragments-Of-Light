@@ -18,7 +18,7 @@ MonoBehaviour:
   NextPageButtonPrefab: {fileID: 9091707722633871589, guid: 1374dbadae27f1851b1e6e8390eaf9b7, type: 3}
   PageNumberLeftPrefab: {fileID: 4033110780349444448, guid: 1acb47bbd97c58678a3602363a064bf5, type: 3}
   PageNumberRightPrefab: {fileID: 3909822265447318456, guid: 714adae2060439438898592be1ffb32e, type: 3}
-  PreviousPageButtonOffset: {x: -860, y: 0, z: 0}
-  NextPageButtonOffset: {x: 860, y: 0, z: 0}
+  PreviousPageButtonOffset: {x: -900, y: 0, z: 0}
+  NextPageButtonOffset: {x: 900, y: 0, z: 0}
   PageNumberLeftOffset: {x: -850, y: -480, z: 0}
   PageNumberRightOffset: {x: 850, y: -480, z: 0}

@@ -17,6 +17,16 @@ public class StartButtonAdapter : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameStateManager.OnEnd += HandleEndGame;
+    }
+    
+    private void OnDisable()
+    {
+        GameStateManager.OnEnd -= HandleEndGame;
+    }
+
     private void HandleStartGame()
     {
         GameStateManager gameStateManager = ManagersManager.Get<GameStateManager>();
@@ -27,9 +37,14 @@ public class StartButtonAdapter : MonoBehaviour
         }
         else
         {
-            Debug.LogError("GameStateManager not found or not initialized!");
+            Debug.Log("GameStateManager not found or not initialized!");
         }
         
         m_button.interactable = false;
+    }
+
+    private void HandleEndGame()
+    {
+        m_button.interactable = true;
     }
 }

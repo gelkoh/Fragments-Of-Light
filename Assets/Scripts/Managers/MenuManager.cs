@@ -69,44 +69,37 @@ public class MenuManager : SingletonManager
         }
     }*/
 
-private void HandleMenuActionPressed()
-{
-	Debug.Log("Handle menu action pressed");
-    if (m_gameStateManager.CurrentGameState == GameState.MainMenu) return;
-    
-    if (m_gameStateManager.CurrentGameState == GameState.IngameMenu)
+    private void HandleMenuActionPressed()
     {
-        HideMenu(); // Blendet das Overlay-Canvas (alpha=0) aus
-    }
-    else
-    {
+        Debug.Log("Handle menu action pressed");
+        if (m_gameStateManager.CurrentGameState == GameState.MainMenu) return;
+        
+        if (m_gameStateManager.CurrentGameState == GameState.IngameMenu)
+        {
+            HideMenu();
+        }
+        else
+        {
 
-        ShowMenu(); // Setzt Alpha auf 1, damit die RenderTexture befüllt wird
+            ShowMenu();
+        }
     }
-}
 
 	public void HideMenu()
 	{
         m_gameStateManager.SetState(GameState.Playing);
-        Book.Instance.HideMenuOnCurrentPage();
+        Book.Instance.HideMenuOnCurrentPageLeft();
         Book.Instance.HideMenuOnCurrentPageRight();
 
-		/*m_menuCanvasGroup.alpha = 0;
-		m_menuCanvasGroup.interactable = false;
-		m_menuCanvasGroup.blocksRaycasts = false;*/
 		Time.timeScale = 1.0f;
 	}
 
 	private void ShowMenu()
 	{
         m_gameStateManager.SetState(GameState.IngameMenu);
-        Book.Instance.ShowMenuOnCurrentPage(m_bookSettings.IngameMenuLeftMaterial);
+        Book.Instance.ShowMenuOnCurrentPageLeft(m_bookSettings.IngameMenuLeftMaterial);
         Book.Instance.ShowMenuOnCurrentPageRight(m_bookSettings.IngameMenuRightMaterial);
 
-
-		/*m_menuCanvasGroup.alpha = 1;
-		m_menuCanvasGroup.interactable = true;
-		m_menuCanvasGroup.blocksRaycasts = true;*/
    		Time.timeScale = 0.0f;
 	}
 }

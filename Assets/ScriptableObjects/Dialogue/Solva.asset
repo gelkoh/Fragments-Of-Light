@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ece888bd0ec44d980a8c4ba5ac17f60, type: 3}
   m_Name: Solva
   m_EditorClassIdentifier: Assembly-CSharp::DialogueText
-  speakerName: Speaker Name
+  speakerName: Solva
   paragraphs:
   - 'A truth buried: The Veilkeeper''s lover sleeps... '
   - 'A slumber of illness, not death. '

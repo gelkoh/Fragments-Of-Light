@@ -6,8 +6,9 @@ public class PageFlipper : MonoBehaviour
     private float flipDuration = 1f;
     private bool isFlipping = false;
 
-private Quaternion initialRotation;
-void Awake()
+    private Quaternion initialRotation;
+    
+    void Awake()
     {
         // Wir merken uns die Rotation, wie sie aus Blender/dem Import kommt.
         initialRotation = transform.localRotation;
@@ -16,8 +17,8 @@ void Awake()
     public void FlipForward()
     {
         if (!isFlipping)
-			StartCoroutine(FlipRoutine(0, 180f)); // Von 0 Grad Abweichung zu -180 Grad    
-	}
+            StartCoroutine(FlipRoutine(0, 180f));
+    }
 
     public void FlipBackward()
     {
@@ -35,13 +36,9 @@ void Awake()
             t += Time.unscaledDeltaTime;
             float normalized = t / flipDuration;
             
-            // Wir nutzen eine sanfte Kurve für das Umblättern
             float easedTime = Mathf.SmoothStep(0, 1, normalized);
             float currentAngle = Mathf.Lerp(startAngle, endAngle, easedTime);
 
-            // DIE BERECHNUNG:
-            // Wir nehmen die Import-Rotation und fügen eine Rotation UM die lokale X-Achse hinzu.
-            // Vector3.right entspricht der lokalen roten Achse (X).
             transform.localRotation = initialRotation * Quaternion.AngleAxis(currentAngle, Vector3.forward);
 
             yield return null;
@@ -52,11 +49,25 @@ void Awake()
         isFlipping = false;
     }
 
-	public void FlipForwardInstant()
-	{
-        Quaternion initialRotation = transform.localRotation;
-        Vector3 initialEuler = initialRotation.eulerAngles;
+    public void FlipForwardInstant()
+    {
+        Quaternion initialRot = transform.localRotation;
+        Vector3 initialEuler = initialRot.eulerAngles;
         transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, 180);
-    	enabled = false;
-	}
+        enabled = false;
+    }
+    
+    // Neue Methode: Flip mit Position-Korrektur für Cover am Ende
+    public void FlipForwardInstantWithCoverFix()
+    {
+        Quaternion initialRot = transform.localRotation;
+        Vector3 initialEuler = initialRot.eulerAngles;
+        transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, 180);
+        
+        // Position-Korrektur: von 0.1 zu -0.1
+        Vector3 pos = transform.localPosition;
+        transform.localPosition = new Vector3(pos.x, -0.01f, pos.z);
+        
+        enabled = false;
+    }
 }

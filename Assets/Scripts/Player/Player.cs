@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
 	private void Start()
 	{
-		StartCoroutine(TemporaryMovementLock(12f)); 
+		StartCoroutine(TemporaryMovementLock(8f)); 
 	}
 
 	public void Die()

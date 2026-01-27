@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Book : MonoBehaviour
 {
 	private bool m_useDebugStart = false;
-	private PageID m_debugStartPage = PageID.Chapter2Level2Gameplay;
+	private PageID m_debugStartPage = PageID.Chapter2Level4Gameplay;
 
 	private Material m_originalRightMaterial;
 	private Material m_originalLeftMaterial;
@@ -41,11 +41,13 @@ public class Book : MonoBehaviour
     void OnEnable()
     {
 		GameStateManager.OnStart += HandleStartGame;
+		GameStateManager.OnEnd += HandleEndGame;
     }
 
     void OnDisable()
     {
 		GameStateManager.OnStart -= HandleStartGame;
+		GameStateManager.OnEnd -= HandleEndGame;
     }
     
     void Start()
@@ -57,81 +59,101 @@ public class Book : MonoBehaviour
 			child.gameObject.AddComponent<PageFlipper>();
 			child.gameObject.AddComponent<MeshCollider>();
 
+			MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
+			Material[] materials = meshRenderer.materials;
+
+			if (materials.Length == 3)
+			{
+				materials[0] = m_bookSettings.UnusedPageMaterial;
+
+				if (counter > 12 && counter < transform.childCount - 2) {
+					materials[1] = m_bookSettings.UnusedPageMaterial;
+                    materials[2] = m_bookSettings.UnusedPageMaterial;
+                }
+			} 
+
+			meshRenderer.materials = materials;
+
 			if (counter == 0)
 			{
-				ApplyPageTextures(child, m_bookSettings.CoverFrontMaterial, m_bookSettings.Endpaper1LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.CoverFrontMaterial, m_bookSettings.Endpaper1LeftMaterial, m_bookSettings.CoverSideMaterial);
 				AddPageClickDetector(child, "CoverUICanvas");
 			}
 
 			if (counter == 1)
 			{
-				ApplyPageTextures(child, m_bookSettings.Endpaper1RightMaterial, m_bookSettings.FrontispieceMaterial);
+				ApplyPageTextures(child, m_bookSettings.Endpaper1RightMaterial, m_bookSettings.FrontispieceMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "Endpaper1UICanvas");
 			}
 
 			if (counter == 2)
 			{
-				ApplyPageTextures(child, m_bookSettings.TitlepageMaterial, m_bookSettings.Chapter1IntroductionLeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.TitlepageMaterial, m_bookSettings.Chapter1IntroductionLeftMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "FrontispieceAndTitlepageUICanvas");
 			}
 
             if (counter == 3)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter1IntroductionRightMaterial, m_bookSettings.Chapter1Level1LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter1IntroductionRightMaterial, m_bookSettings.Chapter1Level1LeftMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "Chapter1IntroductionUICanvas");
 			}
 
 			if (counter == 4)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter1Level1RightMaterial, m_bookSettings.Chapter1Level2LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter1Level1RightMaterial, m_bookSettings.Chapter1Level2LeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 5)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter1Level2RightMaterial, m_bookSettings.Chapter2IntroductionLeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter1Level2RightMaterial, m_bookSettings.Chapter2IntroductionLeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 6)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter2IntroductionRightMaterial, m_bookSettings.Chapter2Level1LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter2IntroductionRightMaterial, m_bookSettings.Chapter2Level1LeftMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "Chapter2IntroductionUICanvas");
 			}
 
 			if (counter == 7)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter2Level1RightMaterial, m_bookSettings.Chapter2Level2LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter2Level1RightMaterial, m_bookSettings.Chapter2Level2LeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 8)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter2Level2RightMaterial, m_bookSettings.Chapter2Level3LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter2Level2RightMaterial, m_bookSettings.Chapter2Level3LeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 9)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter2Level3RightMaterial, m_bookSettings.Chapter2Level4LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter2Level3RightMaterial, m_bookSettings.Chapter2Level4LeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 10)
 			{
-				ApplyPageTextures(child, m_bookSettings.Chapter2Level4RightMaterial, m_bookSettings.ThanksForPlayingThePrototypeLeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.Chapter2Level4RightMaterial, m_bookSettings.ThanksForPlayingThePrototypeLeftMaterial, m_bookSettings.UnusedPageMaterial);
 			}
 
 			if (counter == 11)
 			{
-				ApplyPageTextures(child, m_bookSettings.ThanksForPlayingThePrototypeRightMaterial, m_bookSettings.Endpaper2LeftMaterial);
+				ApplyPageTextures(child, m_bookSettings.ThanksForPlayingThePrototypeRightMaterial, m_bookSettings.Endpaper2LeftMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "ThanksForPlayingThePrototypeUICanvas");
 			}
 
 			if (counter == 12)
 			{
-				ApplyPageTextures(child, m_bookSettings.Endpaper2RightMaterial, m_bookSettings.CoverBackMaterial);
+				ApplyPageTextures(child, m_bookSettings.Endpaper2RightMaterial, m_bookSettings.CoverBackMaterial, m_bookSettings.UnusedPageMaterial);
 				AddPageClickDetector(child, "Endpaper2UICanvas");
+			}
+
+			if (counter == transform.childCount - 2)
+			{
+				ApplyPageTextures(child, m_bookSettings.Endpaper2RightMaterial, m_bookSettings.CoverBackMaterial, m_bookSettings.CoverSideMaterial);
 			}
 
 			if (counter == transform.childCount - 1)
 			{
-				ApplyPageTextures(child, m_bookSettings.Endpaper2RightMaterial, m_bookSettings.CoverBackMaterial);
+				ApplyPageTextures(child, m_bookSettings.SpineMaterial, m_bookSettings.SpineMaterial, m_bookSettings.CoverSideMaterial);
 			}
 
 			counter++;
@@ -149,6 +171,17 @@ public class Book : MonoBehaviour
         	StartCoroutine(MoveBookToRight());
         	FlipPage();
     	}
+
+		Transform spine = transform.GetChild(transform.childCount - 1);
+		spine.gameObject.SetActive(false);
+	}
+
+	private void HandleEndGame()
+	{
+		Transform spine = transform.GetChild(transform.childCount - 1);
+		spine.gameObject.SetActive(true);
+		m_currentPageIndex = 0;
+		m_currentPage = PageID.CoverFront;
 	}
 
 	private IEnumerator MoveBookToRight()
@@ -278,13 +311,14 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 		}
 	}
 
-	private void ApplyPageTextures(Transform child, Material front, Material back)
+	private void ApplyPageTextures(Transform child, Material front, Material back, Material side)
 	{
 		MeshRenderer meshRenderer = child.GetComponent<MeshRenderer>();
 		Material[] materials = meshRenderer.materials;
 
 		if (materials.Length == 3)
 		{
+			materials[0] = side;
 			materials[1] = back;
 			materials[2] = front;
 		} 
@@ -303,16 +337,20 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
     Debug.Log("Close Book Instantly called");
     int totalPages = transform.childCount;
 
+	transform.GetChild(0).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
+	transform.GetChild(totalPages - 2).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
+
+
     for (int i = m_currentPageIndex; i < totalPages; i++)
     {
         PageFlipper flipper = transform.GetChild(i).GetComponent<PageFlipper>();
-        flipper.FlipForwardInstant();
+
+         flipper.FlipForwardInstant();
     }
 
-    m_currentPageIndex = totalPages;
+    m_currentPageIndex = 0;
     m_currentPage = PageID.CoverBack;
 
-    // Wir rufen die Bewegung mit dem Wissen auf, dass wir am Ende sind
     StartCoroutine(MoveBookToCenter(true)); 
 }
 
@@ -397,55 +435,67 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 
 
 
-	public void ShowMenuOnCurrentPage(Material menuMaterial)
+	public void ShowMenuOnCurrentPageLeft(Material menuMaterial)
+{
+    Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
+    MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+    Material[] materials = meshRenderer.materials;
+
+    m_originalRightMaterial = materials[1];
+    materials[1] = menuMaterial;
+    meshRenderer.materials = materials;
+
+    PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+    if (detector != null)
     {
-        Debug.Log("Show menu on current page");
-
-
-        // Die aktuelle Seite holen (die, die gerade offen liegt)
-        Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
-        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
-        Material[] materials = meshRenderer.materials;
-
-        // Wir speichern das Original, um es später wiederherzustellen
-        m_originalRightMaterial = materials[1]; // Index 2 ist bei dir die Front/Rechts
-
-        // Menü-Material zuweisen
-        materials[1] = menuMaterial;
-        meshRenderer.materials = materials;
-
-        // Wichtig: Den Click-Detector auf das Menü-Canvas umbiegen
-        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
-        if (detector != null)
+        detector.SetTargetCanvas("IngameMenuCanvas");
+    }
+    
+    // WICHTIG: Setze Flipping für linke Seite
+    GameObject menuCanvas = GameObject.Find("IngameMenuCanvas");
+    if (menuCanvas != null)
+    {
+        CanvasClickHandler handler = menuCanvas.GetComponent<CanvasClickHandler>();
+        if (handler != null)
         {
-            detector.SetTargetCanvas("IngameMenuCanvas");
+            // Linke Seite: Meist horizontal geflippt
+            handler.SetFlipping(true, false);
         }
     }
+}
 
-	public void ShowMenuOnCurrentPageRight(Material menuMaterial)
+public void ShowMenuOnCurrentPageRight(Material menuMaterial)
+{
+    Transform currentPage = transform.GetChild(m_currentPageIndex);
+    MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+    Material[] materials = meshRenderer.materials;
+
+    m_originalLeftMaterial = materials[2];
+    materials[2] = menuMaterial;
+    meshRenderer.materials = materials;
+
+    PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+    if (detector != null)
     {
-        Transform currentPage = transform.GetChild(m_currentPageIndex);
-        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
-        Material[] materials = meshRenderer.materials;
-
-        m_originalLeftMaterial = materials[2];
-
-        materials[2] = menuMaterial;
-        meshRenderer.materials = materials;
-
-        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
-
-        if (detector != null)
+        m_originalTargetCanvas = detector.GetTargetCanvas();
+        detector.SetTargetCanvas("IngameMenuCanvas");
+    }
+    
+    // WICHTIG: Setze Flipping für rechte Seite
+    GameObject menuCanvas = GameObject.Find("IngameMenuCanvas");
+    if (menuCanvas != null)
+    {
+        CanvasClickHandler handler = menuCanvas.GetComponent<CanvasClickHandler>();
+        if (handler != null)
         {
-			m_originalTargetCanvas = detector.GetTargetCanvas();
-
-            detector.SetTargetCanvas("IngameMenuCanvas");
+            // Rechte Seite: Normalerweise kein Flipping nötig
+            handler.SetFlipping(false, false);
         }
     }
+}
 
-    public void HideMenuOnCurrentPage()
+    public void HideMenuOnCurrentPageLeft()
     {
-        Debug.Log("Hide menu on current page");
         Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
         MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
@@ -454,22 +504,16 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
         materials[1] = m_originalRightMaterial;
         meshRenderer.materials = materials;
 
-
         PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
 
 		if (detector != null)
 		{
 			detector.SetTargetCanvas(m_originalTargetCanvas);
 		}
-
-        // Click-Detector zurück auf das ursprüngliche Gameplay-Canvas (falls nötig)
-        // Hier müsstest du ggf. die ursprüngliche Canvas-ID zwischenspeichern
     }
-
 
     public void HideMenuOnCurrentPageRight()
     {
-        Debug.Log("Hide menu on current page");
         Transform currentPage = transform.GetChild(m_currentPageIndex);
         MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
@@ -478,14 +522,11 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
         materials[2] = m_originalLeftMaterial;
         meshRenderer.materials = materials;
 
- 		 PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+ 		PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
 
 		if (detector != null)
 		{
 			detector.SetTargetCanvas(m_originalTargetCanvas);
 		}
-
-        // Click-Detector zurück auf das ursprüngliche Gameplay-Canvas (falls nötig)
-        // Hier müsstest du ggf. die ursprüngliche Canvas-ID zwischenspeichern
     }
 }
