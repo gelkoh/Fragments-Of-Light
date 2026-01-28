@@ -18,14 +18,19 @@ public class PlayerManager : SingletonManager
         {
             m_activePlayer = Instantiate(m_playerPrefab);
             
-            // WICHTIG: Reset nach Instantiate
-            PlayerMovement pm = m_activePlayer.GetComponent<PlayerMovement>();
-            if (pm != null)
+            PlayerMovement playerMovement = m_activePlayer.GetComponent<PlayerMovement>();
+
+            if (playerMovement != null)
             {
-                pm.ResetMovementState();
+                playerMovement.ResetMovementState();
             }
         }
 
+       return m_activePlayer;
+    }
+
+    public GameObject GetPlayer()
+    {
        return m_activePlayer;
     }
 
@@ -41,30 +46,16 @@ public class PlayerManager : SingletonManager
     {
         if (m_activePlayer == null) return;
         
-        // WICHTIG: Erst Movement State resetten
-        PlayerMovement pm = m_activePlayer.GetComponent<PlayerMovement>();
-        if (pm != null)
+        PlayerMovement playerMovement = m_activePlayer.GetComponent<PlayerMovement>();
+
+        if (playerMovement != null)
         {
-            pm.ResetMovementState();
+            playerMovement.ResetMovementState();
         }
         
-        // Dann Position setzen
         m_activePlayer.transform.SetPositionAndRotation(position, rotation);
-        
-        // OPTIONAL: Noch ein Frame warten lassen
-        // StartCoroutine(DelayedReset(pm));
     }
     
-    // Optional: Für besonders hartnäckige Fälle
-    private System.Collections.IEnumerator DelayedReset(PlayerMovement pm)
-    {
-        yield return new WaitForFixedUpdate();
-        if (pm != null)
-        {
-            pm.ResetMovementState();
-        }
-    }
-   
     public void SetCheckpoint(Checkpoint checkpoint)
     {
        m_lastCheckpoint = checkpoint;
@@ -73,10 +64,5 @@ public class PlayerManager : SingletonManager
     public Checkpoint GetCheckpoint()
     {
        return m_lastCheckpoint;
-    }
-
-    public GameObject GetPlayer()
-    {
-       return m_activePlayer;
     }
 }

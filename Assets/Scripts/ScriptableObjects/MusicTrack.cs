@@ -11,8 +11,8 @@ public enum MusicContext
 public class MusicTrack : ScriptableObject
 {
     public AudioClip audioClip;
-
     public MusicContext context;
 
-    [Range(0f, 1f)] public float defaultVolume = 1f;
+    [Range(0f, 1f)] 
+    public float defaultVolume = 1f;
 }

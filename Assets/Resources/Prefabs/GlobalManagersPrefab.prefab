@@ -74,7 +74,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5552546886975737752}
   - {fileID: 1746723398737565031}
   - {fileID: 7362841363189336405}
   - {fileID: 1747747826758937898}
@@ -100,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManagersManager
   managers:
-  - {fileID: 7610427155602781267}
   - {fileID: 9152065740263500643}
   - {fileID: 8987967432534052205}
   - {fileID: 5226780003459265892}
@@ -470,6 +468,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   m_menuPrefab: {fileID: 1503813064842890402, guid: da718310c4718901c8cc4ec36ff3aefc, type: 3}
   m_bookSettings: {fileID: 11400000, guid: 0130b9d811abdf3bdb3c65f511ceea63, type: 2}
+  m_menu: {fileID: 0}
 --- !u!1 &8886785998626044475
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,47 +516,3 @@ MonoBehaviour:
   m_defaultCursorTexture: {fileID: 2800000, guid: ab2edd5c9615c76ceb7d8b1210cd65ec, type: 3}
   m_pointerCursorTexture: {fileID: 2800000, guid: 34f34b4e5adc760c0b3f18725959f4f5, type: 3}
   m_rotateCursorTexture: {fileID: 2800000, guid: 817f44a101b10b4e588648ccd7fa44fe, type: 3}
---- !u!1 &9122677432959344672
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5552546886975737752}
-  - component: {fileID: 7610427155602781267}
-  m_Layer: 0
-  m_Name: SaveLoadManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5552546886975737752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9122677432959344672}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 637713614824812080}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7610427155602781267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9122677432959344672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b11bce6c824b1b81c3f77dbd2c9c72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SaveLoadManager

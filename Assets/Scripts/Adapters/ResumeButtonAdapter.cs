@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ResumeButtonAdapter : MonoBehaviour
 {
     private Button m_button;
+    private MenuManager m_menuManager;
 
     private void Awake()
     {
@@ -13,11 +14,12 @@ public class ResumeButtonAdapter : MonoBehaviour
         {
             m_button.onClick.AddListener(HandleResumeButtonClicked);
         }
+
+        m_menuManager = ManagersManager.Get<MenuManager>();
     }
 
     private void HandleResumeButtonClicked()
     {
-        Debug.Log("Clicked resume button");
-        ManagersManager.Get<MenuManager>().HideMenu();
+        m_menuManager.HideMenu();
     }
 }

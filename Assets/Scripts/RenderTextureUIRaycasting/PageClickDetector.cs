@@ -5,11 +5,9 @@ public class PageClickDetector : MonoBehaviour
 {
     private Camera m_mainCamera;
     
-    // Separate Canvas Namen für Vorder- und Rückseite
-    private string m_frontCanvasName;  // Material Index 2 (Front)
-    private string m_backCanvasName;   // Material Index 1 (Back)
+    private string m_frontCanvasName;
+    private string m_backCanvasName;
     
-    [Header("Debug")]
     [SerializeField] private bool showDebugRay = true;
     [SerializeField] private Color debugRayColor = Color.yellow;
     
@@ -48,24 +46,17 @@ public class PageClickDetector : MonoBehaviour
             {
                 Vector2 uvHit = hit.textureCoord;
                 
-                // WICHTIG: Bestimme welche Seite getroffen wurde
                 int materialIndex = GetHitMaterialIndex(hit);
                 
                 string targetCanvas = null;
-                bool flipHorizontal = false;
-                bool flipVertical = false;
                 
-                if (materialIndex == 2) // Front (rechte Seite)
+                if (materialIndex == 2)
                 {
                     targetCanvas = m_frontCanvasName;
-                    flipHorizontal = false;
-                    flipVertical = false;
                 }
-                else if (materialIndex == 1) // Back (linke Seite)
+                else if (materialIndex == 1)
                 {
                     targetCanvas = m_backCanvasName;
-                    flipHorizontal = true; // Rückseite ist meist gespiegelt
-                    flipVertical = false;
                 }
                 
                 if (string.IsNullOrEmpty(targetCanvas))
@@ -88,7 +79,6 @@ public class PageClickDetector : MonoBehaviour
 
                 if (handler != null)
                 {
-                    handler.SetFlipping(flipHorizontal, flipVertical);
                     handler.HandlePageClick(uvHit);
                 }
                 else
@@ -112,13 +102,11 @@ public class PageClickDetector : MonoBehaviour
         Mesh mesh = meshCollider.sharedMesh;
         int[] triangles = mesh.triangles;
         
-        // Finde heraus welches Dreieck getroffen wurde
         int triangleIndex = hit.triangleIndex * 3;
         
         if (triangleIndex >= triangles.Length)
             return -1;
         
-        // Bestimme Submesh (= Material Index)
         int submeshCount = mesh.subMeshCount;
         int trianglesSoFar = 0;
         
@@ -128,7 +116,7 @@ public class PageClickDetector : MonoBehaviour
             
             if (triangleIndex < trianglesSoFar + submeshTriangleCount)
             {
-                return i; // Dieser Submesh wurde getroffen
+                return i;
             }
             
             trianglesSoFar += submeshTriangleCount;
@@ -141,12 +129,11 @@ public class PageClickDetector : MonoBehaviour
     {
         if (!hasLastHit) return;
         
-        // Zeichne Hit Point
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(lastHitPoint, 0.03f);
         
-        // Zeichne UV Grid zur Orientierung
         MeshCollider meshCollider = GetComponent<MeshCollider>();
+
         if (meshCollider != null && meshCollider.sharedMesh != null)
         {
             DrawUVDebugGrid();
@@ -164,7 +151,6 @@ public class PageClickDetector : MonoBehaviour
         
         Gizmos.color = Color.green;
         
-        // Zeichne UV Grid Linien
         for (int i = 0; i < triangles.Length; i += 3)
         {
             Vector3 v0 = transform.TransformPoint(vertices[triangles[i]]);
@@ -177,7 +163,6 @@ public class PageClickDetector : MonoBehaviour
         }
     }
 
-    // NEUE API: Setze Canvas für beide Seiten
     public void SetCanvasNames(string frontCanvas, string backCanvas)
     {
         m_frontCanvasName = frontCanvas;
@@ -185,7 +170,6 @@ public class PageClickDetector : MonoBehaviour
         Debug.Log($"PageClickDetector on {gameObject.name}: Front={frontCanvas}, Back={backCanvas}");
     }
     
-    // Rückwärtskompatibilität: Alte Methode setzt beide auf gleich
     public void SetTargetCanvas(string canvasName)
     {
         m_frontCanvasName = canvasName;

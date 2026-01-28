@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb6d36c7ceaa44489d6e7ff7520d0a31, type: 3}
   m_Name: Book Settings
   m_EditorClassIdentifier: Assembly-CSharp::BookSettings
-  MoveAnimationSpeed: 20
+  MoveAnimationSpeed: 0
   PageFlipAudioClip: {fileID: 8300000, guid: 960e5b8e3fb900c5ba17c5c6a74557f5, type: 3}
   CoverFrontMaterial: {fileID: 2100000, guid: 8bcf2a32f8aebaeaeaf6b4f527911219, type: 2}
   Endpaper1LeftMaterial: {fileID: 2100000, guid: d732c25ba4aaab04d9a1f711ce2b509b, type: 2}

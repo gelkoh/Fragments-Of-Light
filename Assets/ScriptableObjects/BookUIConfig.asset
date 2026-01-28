@@ -20,5 +20,5 @@ MonoBehaviour:
   PageNumberRightPrefab: {fileID: 3909822265447318456, guid: 714adae2060439438898592be1ffb32e, type: 3}
   PreviousPageButtonOffset: {x: -900, y: 0, z: 0}
   NextPageButtonOffset: {x: 900, y: 0, z: 0}
-  PageNumberLeftOffset: {x: -850, y: -480, z: 0}
-  PageNumberRightOffset: {x: 850, y: -480, z: 0}
+  PageNumberLeftOffset: {x: -860, y: -480, z: 0}
+  PageNumberRightOffset: {x: 860, y: -480, z: 0}

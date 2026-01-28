@@ -7,8 +7,6 @@ public class CanvasClickHandler : MonoBehaviour
 {
     private Canvas canvas;
     [SerializeField] private Vector2 referenceResolution = new Vector2(1920, 1080);
-    [SerializeField] private bool flipHorizontal = false;
-    [SerializeField] private bool flipVertical = false;
     [SerializeField] private bool showDebugGizmos = true;
     
     private Vector2 lastClickPosition;
@@ -21,10 +19,6 @@ public class CanvasClickHandler : MonoBehaviour
     public void HandlePageClick(Vector2 uvHit)
     {
         if (canvas == null) return;
-        
-        // UV Flipping wenn nötig
-        if (flipHorizontal) uvHit.x = 1f - uvHit.x;
-        if (flipVertical) uvHit.y = 1f - uvHit.y;
         
         float pixelX = uvHit.x * referenceResolution.x;
         float pixelY = uvHit.y * referenceResolution.y;
@@ -55,7 +49,6 @@ public class CanvasClickHandler : MonoBehaviour
             
             Debug.Log($"Clicked: {clickedObject.name} at {pixelPosition}");
             
-            // Slider Handling mit kompletten Events
             Slider slider = clickedObject.GetComponentInParent<Slider>();
             if (slider != null)
             {
@@ -63,7 +56,6 @@ public class CanvasClickHandler : MonoBehaviour
                 return;
             }
             
-            // Normale Button Clicks
             ExecuteEvents.Execute(clickedObject, pointerData, ExecuteEvents.pointerDownHandler);
             ExecuteEvents.Execute(clickedObject, pointerData, ExecuteEvents.pointerUpHandler);
             ExecuteEvents.Execute(clickedObject, pointerData, ExecuteEvents.pointerClickHandler);
@@ -76,7 +68,6 @@ public class CanvasClickHandler : MonoBehaviour
     
     private void HandleSliderClick(Slider slider, PointerEventData pointerData, Vector2 pixelPosition)
     {
-        // Konvertiere Screen Position zu lokalem Slider-Raum
         RectTransform sliderRect = slider.GetComponent<RectTransform>();
         
         Vector2 localPoint;
@@ -87,7 +78,6 @@ public class CanvasClickHandler : MonoBehaviour
             out localPoint
         );
         
-        // Berechne Slider-Wert basierend auf lokaler Position
         Rect rect = sliderRect.rect;
         float normalizedValue;
         
@@ -103,7 +93,7 @@ public class CanvasClickHandler : MonoBehaviour
         {
             normalizedValue = Mathf.InverseLerp(rect.yMin, rect.yMax, localPoint.y);
         }
-        else // TopToBottom
+        else
         {
             normalizedValue = Mathf.InverseLerp(rect.yMax, rect.yMin, localPoint.y);
         }
@@ -120,11 +110,9 @@ public class CanvasClickHandler : MonoBehaviour
     {
         if (!showDebugGizmos || canvas == null) return;
         
-        // Zeichne Canvas Bounds in World Space
         RectTransform rectTransform = canvas.GetComponent<RectTransform>();
         if (rectTransform == null) return;
         
-        // Canvas Corners in World Space
         Vector3[] corners = new Vector3[4];
         rectTransform.GetWorldCorners(corners);
         
@@ -134,10 +122,8 @@ public class CanvasClickHandler : MonoBehaviour
             Gizmos.DrawLine(corners[i], corners[(i + 1) % 4]);
         }
         
-        // Zeige letzte Click-Position als Sphere
         if (lastClickPosition != Vector2.zero)
         {
-            // Konvertiere Pixel zu World Position
             Vector2 viewportPos = new Vector2(
                 lastClickPosition.x / referenceResolution.x,
                 lastClickPosition.y / referenceResolution.y
@@ -152,11 +138,5 @@ public class CanvasClickHandler : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawSphere(worldPos, 0.02f);
         }
-    }
-    
-    public void SetFlipping(bool horizontal, bool vertical)
-    {
-        flipHorizontal = horizontal;
-        flipVertical = vertical;
     }
 }

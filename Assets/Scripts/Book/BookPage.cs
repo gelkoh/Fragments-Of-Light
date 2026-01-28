@@ -34,14 +34,14 @@ public class BookPage : MonoBehaviour
 
         canvasInstance.layer = pageLayer;
 
+        int pageIndex = m_bookLibraryConfig.BookPageConfigs.FindIndex(c => c.ID == ID);
+
         if (m_bookPageConfig.ShowPageBorder)
         {
             GameObject pageBorder = Instantiate(m_bookUIConfig.PageBorderPrefab, canvasInstance.transform);
             pageBorder.layer = pageLayer;
         }
-        
-        int pageIndex = m_bookLibraryConfig.BookPageConfigs.FindIndex(c => c.ID == ID);
-        
+                
         if (m_bookPageConfig.ShowNextPageButton)
         {
             GameObject newButton = Instantiate(m_bookUIConfig.NextPageButtonPrefab, canvasInstance.gameObject.transform);

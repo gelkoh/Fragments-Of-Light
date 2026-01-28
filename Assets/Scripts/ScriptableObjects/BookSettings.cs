@@ -3,8 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BookSettings", menuName = "ScriptableObjects/BookSettings", order = 2)]
 public class BookSettings : ScriptableObject
 {
-    public float MoveAnimationSpeed;
-
     public AudioClip PageFlipAudioClip;
     
     public Material CoverFrontMaterial;

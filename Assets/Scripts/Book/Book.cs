@@ -5,19 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Book : MonoBehaviour
 {
+	public static Book Instance;
+
+	[SerializeField] private BookSettings m_bookSettings;
+
 	private bool m_useDebugStart = false;
 	private PageID m_debugStartPage = PageID.Chapter2Level4Gameplay;
 
 	private Material m_originalRightMaterial;
 	private Material m_originalLeftMaterial;
 	private string m_originalTargetCanvas;
-
-
-
-	public static Book Instance;
     
-	[SerializeField] private BookSettings m_bookSettings;
-
     private int m_currentPageIndex = 0;
 
 	public static Action<PageID> OnPageFlip;
@@ -90,7 +88,6 @@ public class Book : MonoBehaviour
 			{
 				ApplyPageTextures(child, m_bookSettings.TitlepageMaterial, m_bookSettings.Chapter1IntroductionLeftMaterial, m_bookSettings.UnusedPageMaterial);
             	AddPageClickDetector(child, "FrontispieceAndTitlepageUICanvas", "Chapter1IntroductionUICanvas");
-
 			}
 
             if (counter == 3)
@@ -190,7 +187,6 @@ public class Book : MonoBehaviour
     	float duration = 0.6f;
     	float elapsed = 0f;
         Vector3 startPos = transform.localPosition;
-        // Wir erzwingen Y und Z auf ihre Ursprungswerte (z.B. 0 und -0.25)
         Vector3 targetPos = new Vector3(2.5f, 0f, -0.9f); 
 
         while (elapsed < duration)
@@ -198,35 +194,32 @@ public class Book : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.SmoothStep(0, 1, elapsed / duration);
             
-            // Lerp statt Translate garantiert, dass wir auf der Schiene bleiben
             transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
+
         transform.localPosition = targetPos;
     }
 
-// Neue Version mit Parameter, um zwischen Start-Mitte und Ende-Mitte zu unterscheiden
-private IEnumerator MoveBookToCenter(bool isEnding = false)
-{
-    float duration = 0.6f;
-    float elapsed = 0f;
-    Vector3 startPos = transform.localPosition;
-    
-    // Wenn wir am Ende sind (isEnding), muss X auf 5.0f (oder dein gemessener Wert),
-    // damit das Backcover wieder optisch in der Mitte landet.
-    float targetX = isEnding ? 5.0f : 0f; 
-    Vector3 targetPos = new Vector3(targetX, 0f, 0f); 
-
-    while (elapsed < duration)
+    private IEnumerator MoveBookToCenter(bool isEnding = false)
     {
-        elapsed += Time.deltaTime;
-        float t = Mathf.SmoothStep(0, 1, elapsed / duration);
-        transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
-        yield return null;
-    }
+        float duration = 0.6f;
+        float elapsed = 0f;
+        Vector3 startPos = transform.localPosition;
+        
+        float targetX = isEnding ? 5.0f : 0f; 
+        Vector3 targetPos = new Vector3(targetX, 0f, 0f); 
 
-    transform.localPosition = targetPos;
-}
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration);
+            transform.localPosition = Vector3.Lerp(startPos, targetPos, t);
+            yield return null;
+        }
+
+        transform.localPosition = targetPos;
+    }
 
     public void FlipPage()
     {
@@ -328,32 +321,31 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 	}
 
 	private void AddPageClickDetector(Transform child, string frontCanvasName, string backCanvasName)
-{
-    PageClickDetector pageClickDetector = child.gameObject.AddComponent<PageClickDetector>();
-    pageClickDetector.SetCanvasNames(frontCanvasName, backCanvasName);
-}
-
-	public void CloseBookInstantly()
-{
-    Debug.Log("Close Book Instantly called");
-    int totalPages = transform.childCount;
-
-	transform.GetChild(0).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
-	transform.GetChild(totalPages - 2).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
-
-
-    for (int i = m_currentPageIndex; i < totalPages; i++)
     {
-        PageFlipper flipper = transform.GetChild(i).GetComponent<PageFlipper>();
-
-         flipper.FlipForwardInstant();
+        PageClickDetector pageClickDetector = child.gameObject.AddComponent<PageClickDetector>();
+        pageClickDetector.SetCanvasNames(frontCanvasName, backCanvasName);
     }
 
-    m_currentPageIndex = 0;
-    m_currentPage = PageID.CoverBack;
+	public void CloseBookInstantly()
+    {
+        int totalPages = transform.childCount;
 
-    StartCoroutine(MoveBookToCenter(true)); 
-}
+        transform.GetChild(0).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
+        transform.GetChild(totalPages - 2).GetComponent<PageFlipper>().FlipForwardInstantWithCoverFix();
+
+
+        for (int i = m_currentPageIndex; i < totalPages; i++)
+        {
+            PageFlipper flipper = transform.GetChild(i).GetComponent<PageFlipper>();
+
+             flipper.FlipForwardInstant();
+        }
+
+        m_currentPageIndex = 0;
+        m_currentPage = PageID.CoverBack;
+
+        StartCoroutine(MoveBookToCenter(true)); 
+    }
 
 	private IEnumerator SnapBookClosed()
 	{
@@ -369,15 +361,8 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
     	}
 	}
 
-
-
-
-
-
-
 	private IEnumerator DebugStartRoutine()
 	{
-    	// Nutze localPosition statt position, um Konflikte mit Parent-Objekten zu vermeiden
     	transform.localPosition = new Vector3(2.5f, transform.localPosition.y, transform.localPosition.z); 
     
     	int targetIndex = (int)m_debugStartPage;
@@ -393,19 +378,16 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 		}
     }
 
-	// Eine Kopie deiner FlipPage, aber ohne Sound und ohne Zeitverzögerung
+	// Copy of FlipPage, but without sound and delay
 	public void FlipPageInstantly()
 	{
-    	// Seite grafisch sofort umlegen
     	this.gameObject.transform.GetChild(m_currentPageIndex).GetComponent<PageFlipper>().FlipForwardInstant();
     
     	m_currentPageIndex++;
     	m_currentPage = (PageID)m_currentPageIndex;
 
-    	// WICHTIG: Die Events müssen feuern, damit Kameras und Player initialisiert werden!
     	OnPageFlip?.Invoke(m_currentPage);
 
-    	// Hier die Logik-Checks kopieren (oder in eine eigene Methode auslagern)
     	if (m_currentPage == PageID.Chapter1Introduction)
         	SceneManager.LoadScene("Chapter1GameplayScene", LoadSceneMode.Additive);
     
@@ -419,65 +401,46 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
         	ManagersManager.Get<MusicManager>().Play(MusicContext.Chapter2);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public void ShowMenuOnCurrentPageLeft(Material menuMaterial)
-{
-    Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
-    MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
-    Material[] materials = meshRenderer.materials;
-
-    m_originalRightMaterial = materials[1];
-    materials[1] = menuMaterial;
-    meshRenderer.materials = materials;
-
-    PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
-    if (detector != null)
     {
-        // Speichere Original-Canvas
-        m_originalTargetCanvas = detector.GetBackCanvas();
-        // Setze Menü für Back-Seite (Index 1)
-        detector.SetCanvasNames(detector.GetFrontCanvas(), "IngameMenuCanvas");
-    }
-}
+        Transform currentPage = transform.GetChild(m_currentPageIndex - 1);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
 
-public void ShowMenuOnCurrentPageRight(Material menuMaterial)
-{
-    Transform currentPage = transform.GetChild(m_currentPageIndex);
-    MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
-    Material[] materials = meshRenderer.materials;
+        m_originalRightMaterial = materials[1];
+        materials[1] = menuMaterial;
+        meshRenderer.materials = materials;
 
-    m_originalLeftMaterial = materials[2];
-    materials[2] = menuMaterial;
-    meshRenderer.materials = materials;
+        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
 
-    PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
-    if (detector != null)
-    {
-        // Speichere Original-Canvas wenn noch nicht gespeichert
-        if (string.IsNullOrEmpty(m_originalTargetCanvas))
+        if (detector != null)
         {
-            m_originalTargetCanvas = detector.GetFrontCanvas();
+            m_originalTargetCanvas = detector.GetBackCanvas();
+            detector.SetCanvasNames(detector.GetFrontCanvas(), "IngameMenuCanvas");
         }
-        // Setze Menü für Front-Seite (Index 2)
-        detector.SetCanvasNames("IngameMenuCanvas", detector.GetBackCanvas());
     }
-}
+
+    public void ShowMenuOnCurrentPageRight(Material menuMaterial)
+    {
+        Transform currentPage = transform.GetChild(m_currentPageIndex);
+        MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
+        Material[] materials = meshRenderer.materials;
+
+        m_originalLeftMaterial = materials[2];
+        materials[2] = menuMaterial;
+        meshRenderer.materials = materials;
+
+        PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
+        if (detector != null)
+        {
+            if (string.IsNullOrEmpty(m_originalTargetCanvas))
+            {
+                m_originalTargetCanvas = detector.GetFrontCanvas();
+            }
+
+            detector.SetCanvasNames("IngameMenuCanvas", detector.GetBackCanvas());
+        }
+    }
 
     public void HideMenuOnCurrentPageLeft()
     {
@@ -485,7 +448,6 @@ public void ShowMenuOnCurrentPageRight(Material menuMaterial)
         MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
 
-        // Original-Material zurücksetzen
         materials[1] = m_originalRightMaterial;
         meshRenderer.materials = materials;
 
@@ -503,7 +465,6 @@ public void ShowMenuOnCurrentPageRight(Material menuMaterial)
         MeshRenderer meshRenderer = currentPage.GetComponent<MeshRenderer>();
         Material[] materials = meshRenderer.materials;
 
-        // Original-Material zurücksetzen
         materials[2] = m_originalLeftMaterial;
         meshRenderer.materials = materials;
 

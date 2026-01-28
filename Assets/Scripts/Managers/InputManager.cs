@@ -36,7 +36,6 @@ public class InputManager : SingletonManager
 	{
 		if (m_menuAction.WasPressedThisFrame())
 		{
-			Debug.Log("Invoke OnMenuActionPressed");
 			OnMenuActionPressed?.Invoke();
 		}
 	}

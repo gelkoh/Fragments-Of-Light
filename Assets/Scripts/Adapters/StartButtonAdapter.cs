@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class StartButtonAdapter : MonoBehaviour
 {
     private Button m_button;
+    private GameStateManager m_gameStateManager;
 
     void Awake()
     {
@@ -15,6 +16,8 @@ public class StartButtonAdapter : MonoBehaviour
         {
             m_button.onClick.AddListener(HandleStartGame);
         }
+
+        m_gameStateManager = ManagersManager.Get<GameStateManager>();
     }
 
     private void OnEnable()
@@ -29,16 +32,7 @@ public class StartButtonAdapter : MonoBehaviour
 
     private void HandleStartGame()
     {
-        GameStateManager gameStateManager = ManagersManager.Get<GameStateManager>();
-        
-        if (gameStateManager != null)
-        {
-            gameStateManager.StartGame();
-        }
-        else
-        {
-            Debug.Log("GameStateManager not found or not initialized!");
-        }
+        m_gameStateManager.StartGame();
         
         m_button.interactable = false;
     }

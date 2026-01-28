@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI; 
 
-public class MainMenuBackButtonAdapter : MonoBehaviour
+public class QuitButtonAdapter : MonoBehaviour
 {
     private Button m_button;
     private GameStateManager m_gameStateManager;
@@ -12,14 +12,14 @@ public class MainMenuBackButtonAdapter : MonoBehaviour
         
         if (m_button != null)
         {
-            m_button.onClick.AddListener(HandleBackButtonClicked);
+            m_button.onClick.AddListener(HandleQuitButtonClicked);
         }
 
         m_gameStateManager = ManagersManager.Get<GameStateManager>();
     }
 
-    private void HandleBackButtonClicked()
+    private void HandleQuitButtonClicked()
     {
-        m_gameStateManager.SetState(GameState.MainMenu);
+        m_gameStateManager.Quit();
     }
 }

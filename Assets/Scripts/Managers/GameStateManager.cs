@@ -8,7 +8,6 @@ public enum GameState
     MainMenuSettings,
     IngameMenu,
     Playing,
-    MainMenuLoad,
 	MainMenuLoadGame
 }
 

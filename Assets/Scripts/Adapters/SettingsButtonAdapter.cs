@@ -17,7 +17,6 @@ public class SettingsButtonAdapter : MonoBehaviour
 
     private void HandleSettingsButtonClicked()
     {
-        Debug.Log("Settings button clicked");
         ManagersManager.Get<GameStateManager>().SetState(GameState.MainMenuSettings);
     }
 }

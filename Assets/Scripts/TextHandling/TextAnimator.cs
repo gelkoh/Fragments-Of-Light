@@ -10,7 +10,6 @@ public class TextAnimator : MonoBehaviour
     private string m_text = "";
     private int m_letterIndex = 0;
     
-
     void Awake()
     {
         m_textComponent = this.gameObject.GetComponent<TextMeshProUGUI>();

@@ -3,7 +3,6 @@ using UnityEngine;
 public enum CursorState
 {
     Default,
-	Pointer,
     Rotate
 }
 
@@ -12,7 +11,6 @@ public class CursorManager : SingletonManager
     public static CursorManager Instance;
 
     [SerializeField] private Texture2D m_defaultCursorTexture;
-    [SerializeField] private Texture2D m_pointerCursorTexture;
     [SerializeField] private Texture2D m_rotateCursorTexture;
     
     private CursorMode m_cursorMode = CursorMode.Auto;

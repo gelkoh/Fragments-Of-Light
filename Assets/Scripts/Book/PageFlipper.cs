@@ -10,7 +10,6 @@ public class PageFlipper : MonoBehaviour
     
     void Awake()
     {
-        // Wir merken uns die Rotation, wie sie aus Blender/dem Import kommt.
         initialRotation = transform.localRotation;
     }
 
@@ -44,7 +43,6 @@ public class PageFlipper : MonoBehaviour
             yield return null;
         }
 
-        // Exakten Endwert setzen
         transform.localRotation = initialRotation * Quaternion.AngleAxis(endAngle, Vector3.forward);
         isFlipping = false;
     }
@@ -57,14 +55,12 @@ public class PageFlipper : MonoBehaviour
         enabled = false;
     }
     
-    // Neue Methode: Flip mit Position-Korrektur für Cover am Ende
     public void FlipForwardInstantWithCoverFix()
     {
         Quaternion initialRot = transform.localRotation;
         Vector3 initialEuler = initialRot.eulerAngles;
         transform.localRotation = Quaternion.Euler(initialEuler.x, initialEuler.y, 180);
         
-        // Position-Korrektur: von 0.1 zu -0.1
         Vector3 pos = transform.localPosition;
         transform.localPosition = new Vector3(pos.x, -0.01f, pos.z);
         

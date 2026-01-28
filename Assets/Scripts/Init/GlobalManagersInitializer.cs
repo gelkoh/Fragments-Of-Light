@@ -10,8 +10,6 @@ public class GlobalManagersInitializer
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void InitializeGlobalManagers()
     {
-        Debug.Log("Initializing Global Managers");
-        
         if (Instance == null)
         {
             GameObject globalManagersPrefab = Resources.Load<GameObject>(m_prefabPath);
@@ -27,9 +25,8 @@ public class GlobalManagersInitializer
                 Debug.LogError("Global Managers Prefab not found in Resource directory");
             }
 
-			//SceneManager.LoadScene("Main", LoadSceneMode.Additive);
+			// Loading this scene at the beginning is necessary to display the book cover
 			SceneManager.LoadScene("PagesScene", LoadSceneMode.Additive);
-            //SceneManager.LoadScene("GameplayScene", LoadSceneMode.Additive);
         }
     }
 }

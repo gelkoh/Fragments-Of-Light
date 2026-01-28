@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     
-	[SerializeField] public PlayerStats m_playerStats;
+	public PlayerStats m_playerStats;
 	[SerializeField] private AudioClip m_gameOverSound;
 
 	public int flamesCollected = 0;
@@ -47,6 +47,17 @@ public class Player : MonoBehaviour
 		StartCoroutine(TemporaryMovementLock(8f)); 
 	}
 
+	private void HandlePageFlip(PageID pageID)
+	{
+    	StartCoroutine(TemporaryMovementLock(1.2f)); 
+	}
+
+	private void HandleFlameCollected()
+	{
+		flamesCollected++;
+		OnFlameCountUpdated?.Invoke();
+	}
+
 	public void Die()
 	{
         StartCoroutine(DieRoutine());
@@ -73,35 +84,6 @@ public class Player : MonoBehaviour
     	m_movement.SetMovementLock(false);
 	}
 
-	public void Save(ref PlayerSaveData playerSaveData)
-	{
-		playerSaveData.Position = transform.position;
-	}
-
-	public void Load(PlayerSaveData playerSaveData)
-	{
-	
-		transform.position = playerSaveData.Position;
-	}
-
-	private void HandlePageFlip(PageID pageID)
-	{
-    	StartCoroutine(TemporaryMovementLock(1.2f)); 
-	}
-    
 	private void LockMovement() => m_movement.SetMovementLock(true);
     private void UnlockMovement() => m_movement.SetMovementLock(false);
-
-	private void HandleFlameCollected()
-	{
-		flamesCollected++;
-		Debug.Log("Flames collected: " + flamesCollected);
-		OnFlameCountUpdated?.Invoke();
-	}
-}
-
-[System.Serializable]
-public struct PlayerSaveData
-{
-	public Vector3 Position;
 }

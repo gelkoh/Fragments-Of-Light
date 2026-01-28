@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public abstract class NPC : MonoBehaviour, IInteractable
 {
     [SerializeField] private SpriteRenderer m_interactSprite;
-    private const float INTERACT_DISTANCE = 1f;
+    [SerializeField] float INTERACT_DISTANCE = 1f;
 	private PlayerManager m_playerManager;
 
 	private void Awake()
@@ -33,15 +33,11 @@ public abstract class NPC : MonoBehaviour, IInteractable
 
     private bool IsWithinInteractDistance()
     {
-		if (m_playerManager.GetPlayer() == null) return false;
-		//if (Player.Instance == null) return false;
+		GameObject playerObj = m_playerManager.GetPlayer();
 
-        Transform m_playerTransform = Player.Instance.transform;
+		if (playerObj == null) return false;
 
-		if (Player.Instance == null) 
-		{
-			Debug.Log("Player Instance null");
-		}
+		Transform m_playerTransform = playerObj.transform;
 
         if (Vector2.Distance(m_playerTransform.position, transform.position) < INTERACT_DISTANCE)
         {
