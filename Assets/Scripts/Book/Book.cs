@@ -77,25 +77,26 @@ public class Book : MonoBehaviour
 			if (counter == 0)
 			{
 				ApplyPageTextures(child, m_bookSettings.CoverFrontMaterial, m_bookSettings.Endpaper1LeftMaterial, m_bookSettings.CoverSideMaterial);
-				AddPageClickDetector(child, "CoverUICanvas");
+            	AddPageClickDetector(child, "CoverUICanvas", "Endpaper1UICanvas");
 			}
 
 			if (counter == 1)
 			{
 				ApplyPageTextures(child, m_bookSettings.Endpaper1RightMaterial, m_bookSettings.FrontispieceMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "Endpaper1UICanvas");
+            	AddPageClickDetector(child, "Endpaper1UICanvas", "FrontispieceAndTitlepageUICanvas");
 			}
 
 			if (counter == 2)
 			{
 				ApplyPageTextures(child, m_bookSettings.TitlepageMaterial, m_bookSettings.Chapter1IntroductionLeftMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "FrontispieceAndTitlepageUICanvas");
+            	AddPageClickDetector(child, "FrontispieceAndTitlepageUICanvas", "Chapter1IntroductionUICanvas");
+
 			}
 
             if (counter == 3)
 			{
 				ApplyPageTextures(child, m_bookSettings.Chapter1IntroductionRightMaterial, m_bookSettings.Chapter1Level1LeftMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "Chapter1IntroductionUICanvas");
+            	AddPageClickDetector(child, "Chapter1IntroductionUICanvas", null);
 			}
 
 			if (counter == 4)
@@ -111,7 +112,7 @@ public class Book : MonoBehaviour
 			if (counter == 6)
 			{
 				ApplyPageTextures(child, m_bookSettings.Chapter2IntroductionRightMaterial, m_bookSettings.Chapter2Level1LeftMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "Chapter2IntroductionUICanvas");
+				AddPageClickDetector(child, "Chapter2IntroductionUICanvas", null);
 			}
 
 			if (counter == 7)
@@ -137,13 +138,13 @@ public class Book : MonoBehaviour
 			if (counter == 11)
 			{
 				ApplyPageTextures(child, m_bookSettings.ThanksForPlayingThePrototypeRightMaterial, m_bookSettings.Endpaper2LeftMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "ThanksForPlayingThePrototypeUICanvas");
+				AddPageClickDetector(child, "ThanksForPlayingThePrototypeUICanvas", "Endpaper2UICanvas");
 			}
 
 			if (counter == 12)
 			{
 				ApplyPageTextures(child, m_bookSettings.Endpaper2RightMaterial, m_bookSettings.CoverBackMaterial, m_bookSettings.UnusedPageMaterial);
-				AddPageClickDetector(child, "Endpaper2UICanvas");
+				AddPageClickDetector(child, "Endpaper2UICanvas", null);
 			}
 
 			if (counter == transform.childCount - 2)
@@ -326,11 +327,11 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
 		meshRenderer.materials = materials;
 	}
 
-	private void AddPageClickDetector(Transform child, string targetCanvasName)
-	{
-		PageClickDetector pageClickDetector = child.gameObject.AddComponent<PageClickDetector>();
-		pageClickDetector.SetTargetCanvas(targetCanvasName);
-	}
+	private void AddPageClickDetector(Transform child, string frontCanvasName, string backCanvasName)
+{
+    PageClickDetector pageClickDetector = child.gameObject.AddComponent<PageClickDetector>();
+    pageClickDetector.SetCanvasNames(frontCanvasName, backCanvasName);
+}
 
 	public void CloseBookInstantly()
 {
@@ -448,19 +449,10 @@ private IEnumerator MoveBookToCenter(bool isEnding = false)
     PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
     if (detector != null)
     {
-        detector.SetTargetCanvas("IngameMenuCanvas");
-    }
-    
-    // WICHTIG: Setze Flipping für linke Seite
-    GameObject menuCanvas = GameObject.Find("IngameMenuCanvas");
-    if (menuCanvas != null)
-    {
-        CanvasClickHandler handler = menuCanvas.GetComponent<CanvasClickHandler>();
-        if (handler != null)
-        {
-            // Linke Seite: Meist horizontal geflippt
-            handler.SetFlipping(true, false);
-        }
+        // Speichere Original-Canvas
+        m_originalTargetCanvas = detector.GetBackCanvas();
+        // Setze Menü für Back-Seite (Index 1)
+        detector.SetCanvasNames(detector.GetFrontCanvas(), "IngameMenuCanvas");
     }
 }
 
@@ -477,20 +469,13 @@ public void ShowMenuOnCurrentPageRight(Material menuMaterial)
     PageClickDetector detector = currentPage.GetComponent<PageClickDetector>();
     if (detector != null)
     {
-        m_originalTargetCanvas = detector.GetTargetCanvas();
-        detector.SetTargetCanvas("IngameMenuCanvas");
-    }
-    
-    // WICHTIG: Setze Flipping für rechte Seite
-    GameObject menuCanvas = GameObject.Find("IngameMenuCanvas");
-    if (menuCanvas != null)
-    {
-        CanvasClickHandler handler = menuCanvas.GetComponent<CanvasClickHandler>();
-        if (handler != null)
+        // Speichere Original-Canvas wenn noch nicht gespeichert
+        if (string.IsNullOrEmpty(m_originalTargetCanvas))
         {
-            // Rechte Seite: Normalerweise kein Flipping nötig
-            handler.SetFlipping(false, false);
+            m_originalTargetCanvas = detector.GetFrontCanvas();
         }
+        // Setze Menü für Front-Seite (Index 2)
+        detector.SetCanvasNames("IngameMenuCanvas", detector.GetBackCanvas());
     }
 }
 
